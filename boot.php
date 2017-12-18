@@ -48,15 +48,15 @@ function rex_d2u_staff_media_is_in_use(rex_extension_point $ep) {
 	$filename = addslashes($params['filename']);
 
 	// Staff
-	$sql_history = rex_sql::factory();
-	$sql_history->setQuery('SELECT staff_id, name FROM `' . rex::getTablePrefix() . 'd2u_staff` '
+	$sql_staff = rex_sql::factory();
+	$sql_staff->setQuery('SELECT staff_id, name FROM `' . rex::getTablePrefix() . 'd2u_staff` '
 		.'WHERE picture = "'. $filename .'"');  
 
 	// Prepare warnings
 	// Staff
-	for($i = 0; $i < $sql_history->getRows(); $i++) {
+	for($i = 0; $i < $sql_staff->getRows(); $i++) {
 		$message = '<a href="javascript:openPage(\'index.php?page=d2u_staff/staff&func=edit&entry_id='.
-			$sql_history->getValue('staff_id') .'\')">'. rex_i18n::msg('d2u_staff_rights') ." - ". rex_i18n::msg('d2u_staff_history') .': '. $sql_history->getValue('name') .'</a>';
+			$sql_staff->getValue('staff_id') .'\')">'. rex_i18n::msg('d2u_staff_rights') ." - ". rex_i18n::msg('d2u_staff_staff') .': '. $sql_staff->getValue('name') .'</a>';
 		if(!in_array($message, $warning)) {
 			$warning[] = $message;
 		}

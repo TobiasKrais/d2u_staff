@@ -90,9 +90,6 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 			if($result->getValue("picture") != "") {
 				$this->picture = $result->getValue("picture");
 			}
-			else {
-				$this->picture = rex_addon::get('d2u_staff')->getAssetsUrl("noavatar.jpg");
-			}
 			$this->position = $result->getValue("position");
 			$this->priority = $result->getValue("priority");
 			$this->translation_needs_update = $result->getValue("translation_needs_update");

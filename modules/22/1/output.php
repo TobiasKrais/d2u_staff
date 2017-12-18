@@ -20,7 +20,14 @@
 		print '<div class="'. $position_container_classes .'">';
 		print '<div class="module-box">';
 		print '<div class="row">';
-		print '<div class="col-12 col-sm-6 col-md-4"><img src="index.php?rex_media_type='. $type .'&amp;rex_media_file='. $staff->picture .'" alt="'. $staff->name .'"><br><br></div>';
+		print '<div class="col-12 col-sm-6 col-md-4"><img src="';
+			if($staff->picture == "") {
+				print rex_addon::get('d2u_staff')->getAssetsUrl("noavatar.jpg");
+			}
+		else {
+			print 'index.php?rex_media_type='. $type .'&rex_media_file='. $staff->picture;
+		}
+		print '" alt="'. $staff->name .'"><br><br></div>';
 		print '<div class="col-12 col-sm-6 col-md-8">';
 		print '<strong>'. $staff->name.'</strong> '. $staff->position .'<br><br>';
 		if($staff->area_of_responsibility != "") {

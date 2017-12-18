@@ -1,0 +1,15 @@
+d2u_staff = D2U Staff
+d2u_staff_area_of_responsibility = Area of responsibility
+d2u_staff_citation = Quote
+d2u_staff_company = Employer from D2U Address addon
+d2u_staff_name = Name
+d2u_staff_no_link = Do not link
+d2u_staff_no_staff_found = No staff members found.
+d2u_staff_picture = Picture
+d2u_staff_position = Position
+d2u_staff_staff = Staff
+
+d2u_staff_rights = D2U Staff addon
+d2u_staff_rights_edit_data = D2U Staff addon: edit rights for data
+d2u_staff_rights_edit_lang = D2U Staff addon: edit rights for translations (languages set in user roles apply)
+d2u_staff_rights_settings = D2U Staff addon: settings
