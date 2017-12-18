@@ -115,7 +115,7 @@ if ($func == 'edit' || $func == 'add') {
 							d2u_addon_backend_helper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', $staff->online_status == "online", $readonly);
 							if(rex_addon::get("d2u_address")->isAvailable()) {
 								$options = [0 => rex_i18n::msg('d2u_staff_no_link')];
-								foreach(Address::getAll(rex_config::get("d2u_helper", "default_lang"), FALSE, FALSE) as $address) {
+								foreach(\D2U_Address\Address::getAll(rex_config::get("d2u_helper", "default_lang"), FALSE, FALSE) as $address) {
 									$options[$address->address_id] = $address->company;
 								}
 								d2u_addon_backend_helper::form_select('d2u_staff_company', 'form[address_id]', $options, [$staff->address_id], 1, FALSE, $readonly);
@@ -186,7 +186,7 @@ if ($func == '') {
 	$query = 'SELECT staff.staff_id, name, position, priority, online_status '
 		. 'FROM '. rex::getTablePrefix() .'d2u_staff AS staff '
 		. 'LEFT JOIN '. rex::getTablePrefix() .'d2u_staff_lang AS lang '
-			. 'ON staff.staff_id = lang.staff_id AND lang.clang_id = '. rex_config::get("d2u_helper", "default_lang") .' '
+			. 'ON staff.staff_id = lang.staff_id AND lang.clang_id = '. rex_config::get("d2u_helper", "default_lang", rex_clang::getStartId()) .' '
 		.'ORDER BY name ASC';
     $list = rex_list::factory($query);
 
@@ -210,7 +210,7 @@ if ($func == '') {
    
     $list->setColumnLabel('priority', rex_i18n::msg('header_priority'));
 
-    $list->addColumn(rex_i18n::msg('module_functions'), '<i class="rex-icon rex-icon-edit"></i> ' . rex_i18n::msg('system_update'));
+    $list->addColumn(rex_i18n::msg('module_functions'), '<i class="rex-icon rex-icon-edit"></i> ' . rex_i18n::msg('edit'));
     $list->setColumnLayout(rex_i18n::msg('module_functions'), ['<th class="rex-table-action" colspan="2">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams(rex_i18n::msg('module_functions'), ['func' => 'edit', 'entry_id' => '###staff_id###']);
 
