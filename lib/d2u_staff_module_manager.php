@@ -13,7 +13,7 @@ class D2UStaffModules {
 		$modules = [];
 		$modules[] = new D2UModule("22-1",
 			"D2U Mitarbeiter - Liste",
-			1);
+			2);
 		return $modules;
 	}
 }
