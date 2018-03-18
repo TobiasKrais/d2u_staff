@@ -42,7 +42,7 @@
 			print $staff->area_of_responsibility .'<br>';
 		}
 		if($staff->citation != "") {
-			print $staff->citation;
+			print d2u_addon_frontend_helper::prepareEditorField($staff->citation);
 		}
 		print '</div>';
 		print '</div>';
