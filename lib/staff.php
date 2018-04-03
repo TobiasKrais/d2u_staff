@@ -85,7 +85,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 			$this->article_id = $result->getValue("article_id");
 			$this->citation = stripslashes(htmlspecialchars_decode($result->getValue("citation")));
 			$this->area_of_responsibility = $result->getValue("area_of_responsibility");
-			$this->name = $result->getValue("name");
+			$this->name = stripslashes($result->getValue("name"));
 			$this->online_status = $result->getValue("online_status");
 			if($result->getValue("picture") != "") {
 				$this->picture = $result->getValue("picture");
@@ -231,7 +231,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 					."online_status = '". $this->online_status ."', "
 					."picture = '". $this->picture ."', "
 					."priority = '". $this->priority ."', "
-					."name = '". $this->name ."', "
+					."name = '". addslashes($this->name) ."', "
 					."address_id = ". $this->address_id .", "
 					."updatedate = ". time();
 

@@ -30,6 +30,7 @@ $d2u_module_manager->showManagerList();
 <h2>Changelog</h2>
 <p>1.0.1-DEV:</p>
 <ul>
+	<li>Bugfix: Fehler beim Speichern von Namen mit einfachem Anführungszeichen behoben.</li>
 	<li>Übernimmt Lieblingseditor aus D2U Helper Addon.</li>
 	<li>Beispielmodul jetzt mit Bootstrap 4.</li>
 	<li>Im Setup jetzt GitHub Link für Fehlermeldungen.</li>
