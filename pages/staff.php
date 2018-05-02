@@ -110,7 +110,7 @@ if ($func == 'edit' || $func == 'add') {
 								$readonly = FALSE;
 							}
 							
-							d2u_addon_backend_helper::form_input('d2u_staff_name', "form[name]", $staff->name, TRUE, $readonly);
+							d2u_addon_backend_helper::form_input('d2u_helper_name', "form[name]", $staff->name, TRUE, $readonly);
 							d2u_addon_backend_helper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
 							d2u_addon_backend_helper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', $staff->online_status == "online", $readonly);
 							if(rex_addon::get("d2u_address")->isAvailable()) {
@@ -144,7 +144,7 @@ if ($func == 'edit' || $func == 'add') {
 									$options_translations["yes"] = rex_i18n::msg('d2u_helper_translation_needs_update');
 									$options_translations["no"] = rex_i18n::msg('d2u_helper_translation_is_uptodate');
 									$options_translations["delete"] = rex_i18n::msg('d2u_helper_translation_delete');
-									d2u_addon_backend_helper::form_select('d2u_helper_translation', 'form[lang]['. $rex_clang->getId() .'][translation_needs_update]', $options_translations, array($staff->translation_needs_update), 1, FALSE, $readonly_lang);
+									d2u_addon_backend_helper::form_select('d2u_helper_translation', 'form[lang]['. $rex_clang->getId() .'][translation_needs_update]', $options_translations, [$staff->translation_needs_update], 1, FALSE, $readonly_lang);
 								}
 								else {
 									print '<input type="hidden" name="form[lang]['. $rex_clang->getId() .'][translation_needs_update]" value="">';
@@ -203,7 +203,7 @@ if ($func == '') {
     $list->setColumnLabel('staff_id', rex_i18n::msg('id'));
     $list->setColumnLayout('staff_id', ['<th class="rex-table-id">###VALUE###</th>', '<td class="rex-table-id">###VALUE###</td>']);
 
-    $list->setColumnLabel('name', rex_i18n::msg('d2u_staff_name'));
+    $list->setColumnLabel('name', rex_i18n::msg('d2u_helper_name'));
     $list->setColumnParams('name', ['func' => 'edit', 'entry_id' => '###staff_id###']);
 
     $list->setColumnLabel('position', rex_i18n::msg('d2u_staff_position'));
