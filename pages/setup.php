@@ -28,7 +28,7 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.0.1-DEV:</p>
+<p>1.0.1:</p>
 <ul>
 	<li>Bugfix: Fehler beim Speichern von Namen mit einfachem Anführungszeichen behoben.</li>
 	<li>Übernimmt Lieblingseditor aus D2U Helper Addon.</li>
