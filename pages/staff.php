@@ -23,7 +23,7 @@ if (filter_input(INPUT_POST, "btn_save") == 1 || filter_input(INPUT_POST, "btn_a
 		if($staff === FALSE) {
 			$staff = new Staff($staff_id, $rex_clang->getId());
 			$staff->staff_id = $staff_id; // Ensure correct ID in case first language has no object
-			if(rex_addon::get("d2u_address")->isAvailable() && isset($form['address_id'])) {
+			if(\rex_addon::get("d2u_address")->isAvailable() && isset($form['address_id'])) {
 				$staff->address_id = $form['address_id'];
 			}
 			$staff->article_id = $input_link['article_id'];
@@ -113,7 +113,7 @@ if ($func == 'edit' || $func == 'add') {
 							d2u_addon_backend_helper::form_input('d2u_helper_name', "form[name]", $staff->name, TRUE, $readonly);
 							d2u_addon_backend_helper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
 							d2u_addon_backend_helper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', $staff->online_status == "online", $readonly);
-							if(rex_addon::get("d2u_address")->isAvailable()) {
+							if(\rex_addon::get("d2u_address")->isAvailable()) {
 								$options = [0 => rex_i18n::msg('d2u_staff_no_link')];
 								foreach(\D2U_Address\Address::getAll(rex_config::get("d2u_helper", "default_lang"), FALSE, FALSE) as $address) {
 									$options[$address->address_id] = $address->company;

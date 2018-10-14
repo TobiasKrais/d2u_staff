@@ -1,6 +1,6 @@
 <?php
 // Update modules
-if(class_exists(D2UModuleManager)) {
+if(class_exists('D2UModuleManager')) {
 	$modules = [];
 	$modules[] = new D2UModule("22-1",
 		"D2U Personen - Karusell",
