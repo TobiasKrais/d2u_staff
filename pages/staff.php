@@ -149,11 +149,25 @@ if ($func == 'edit' || $func == 'add') {
 								else {
 									print '<input type="hidden" name="form[lang]['. $rex_clang->getId() .'][translation_needs_update]" value="">';
 								}
-								
-								d2u_addon_backend_helper::form_input('d2u_staff_area_of_responsibility', "form[lang][". $rex_clang->getId() ."][area_of_responsibility]", $staff->area_of_responsibility, FALSE, $readonly_lang);
-								d2u_addon_backend_helper::form_input('d2u_staff_position', "form[lang][". $rex_clang->getId() ."][position]", $staff->position, FALSE, $readonly_lang);
-								d2u_addon_backend_helper::form_textarea('d2u_staff_citation', "form[lang][". $rex_clang->getId() ."][citation]", $staff->citation, 5, FALSE, $readonly_lang, TRUE);
 							?>
+							<script>
+								// Hide on document load
+								$(document).ready(function() {
+									toggleClangDetailsView(<?php print $rex_clang->getId(); ?>);
+								});
+
+								// Hide on selection change
+								$("select[name='form[lang][1][translation_needs_update]']").on('change', function(e) {
+									toggleClangDetailsView(<?php print $rex_clang->getId(); ?>);
+								});
+							</script>
+							<div id="details_clang_<?php print $rex_clang->getId(); ?>">
+								<?php
+									d2u_addon_backend_helper::form_input('d2u_staff_area_of_responsibility', "form[lang][". $rex_clang->getId() ."][area_of_responsibility]", $staff->area_of_responsibility, FALSE, $readonly_lang);
+									d2u_addon_backend_helper::form_input('d2u_staff_position', "form[lang][". $rex_clang->getId() ."][position]", $staff->position, FALSE, $readonly_lang);
+									d2u_addon_backend_helper::form_textarea('d2u_staff_citation', "form[lang][". $rex_clang->getId() ."][citation]", $staff->citation, 5, FALSE, $readonly_lang, TRUE);
+								?>
+							</div>
 						</div>
 					</fieldset>
 				<?php
