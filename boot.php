@@ -27,13 +27,6 @@ function rex_d2u_staff_clang_deleted(rex_extension_point $ep) {
 		$cur_staff->delete(FALSE);
 	}
 	
-	// Delete language settings
-	if(rex_config::has('d2u_staff', 'lang_replacement_'. $clang_id)) {
-		rex_config::remove('d2u_staff', 'lang_replacement_'. $clang_id);
-	}
-	// Delete language replacements
-	d2u_staff_lang_helper::factory()->uninstall($clang_id);
-
 	return $warning;
 }
 
