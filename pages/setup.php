@@ -30,6 +30,7 @@ $d2u_module_manager->showManagerList();
 <h2>Changelog</h2>
 <p>1.0.2-DEV:</p>
 <ul>
+	<li>Listen im Backend werden jetzt nicht mehr in Seiten unterteilt.</li>
 	<li>Konvertierung der Datenbanktabellen zu utf8mb4.</li>
 	<li>Bugfix beim Löschen einer Sprache.</li>
 	<li>Sprachdetails werden ausgeblendet, wenn Speicherung der Sprache nicht vorgesehen ist.</li>
