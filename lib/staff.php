@@ -235,8 +235,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 					."picture = '". $this->picture ."', "
 					."priority = '". $this->priority ."', "
 					."name = '". addslashes($this->name) ."', "
-					."address_id = ". $this->address_id .", "
-					."updatedate = ". time();
+					."address_id = ". $this->address_id;
 
 			if($this->staff_id == 0) {
 				$query = "INSERT INTO ". $query;
@@ -263,8 +262,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 						."area_of_responsibility = '". $this->area_of_responsibility ."', "
 						."citation = '". addslashes(htmlspecialchars($this->citation)) ."', "
 						."position = '". $this->position ."', "
-						."translation_needs_update = '". $this->translation_needs_update ."', "
-						."updatedate = ". time();
+						."translation_needs_update = '". $this->translation_needs_update ."' ";
 
 				$result = rex_sql::factory();
 				$result->setQuery($query);

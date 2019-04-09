@@ -9,7 +9,6 @@ $sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff
     `address_id` int(10) NULL default NULL,
     `article_id` int(10) NULL default NULL,
     `priority` int(11) NULL default NULL,
-    `updatedate` int(11) default NULL,
     PRIMARY KEY (`staff_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;");
 $sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff_lang` (
@@ -19,6 +18,5 @@ $sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff
     `position` varchar(255) collate utf8mb4_unicode_ci default NULL,
     `citation` text collate utf8mb4_unicode_ci default NULL,
 	`translation_needs_update` varchar(6) collate utf8mb4_unicode_ci default NULL,
-    `updatedate` int(11) default NULL,
     PRIMARY KEY (`staff_id`, `clang_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;");
