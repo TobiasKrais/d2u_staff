@@ -18,3 +18,8 @@ if (rex_string::versionCompare($this->getVersion(), '1.0.2', '<')) {
 	$sql->setQuery("ALTER TABLE ". \rex::getTablePrefix() ."d2u_staff DROP updatedate;");
 	$sql->setQuery("ALTER TABLE ". \rex::getTablePrefix() ."d2u_staff_lang DROP updatedate;");
 }
+$sql->setQuery("SHOW COLUMNS FROM ". \rex::getTablePrefix() ."d2u_staff_lang LIKE 'lang_name';");
+if($sql->getRows() == 0) {
+	$sql->setQuery("ALTER TABLE ". \rex::getTablePrefix() ."d2u_staff_lang "
+		. "ADD lang_name varchar(255) collate utf8mb4_unicode_ci default NULL AFTER clang_id;");
+}

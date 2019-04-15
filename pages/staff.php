@@ -38,6 +38,7 @@ if (filter_input(INPUT_POST, "btn_save") == 1 || filter_input(INPUT_POST, "btn_a
 		$staff->area_of_responsibility = $form['lang'][$rex_clang->getId()]['area_of_responsibility'];
 		$staff->citation = $form['lang'][$rex_clang->getId()]['citation'];
 		$staff->position = $form['lang'][$rex_clang->getId()]['position'];
+		$staff->lang_name = $form['lang'][$rex_clang->getId()]['lang_name'];
 		$staff->translation_needs_update = $form['lang'][$rex_clang->getId()]['translation_needs_update'];
 		
 		if($staff->translation_needs_update == "delete") {
@@ -163,6 +164,7 @@ if ($func == 'edit' || $func == 'add') {
 							</script>
 							<div id="details_clang_<?php print $rex_clang->getId(); ?>">
 								<?php
+									d2u_addon_backend_helper::form_input('d2u_staff_lang_name', "form[lang][". $rex_clang->getId() ."][lang_name]", $staff->lang_name, FALSE, $readonly_lang);
 									d2u_addon_backend_helper::form_input('d2u_staff_area_of_responsibility', "form[lang][". $rex_clang->getId() ."][area_of_responsibility]", $staff->area_of_responsibility, FALSE, $readonly_lang);
 									d2u_addon_backend_helper::form_input('d2u_staff_position', "form[lang][". $rex_clang->getId() ."][position]", $staff->position, FALSE, $readonly_lang);
 									d2u_addon_backend_helper::form_textarea('d2u_staff_citation', "form[lang][". $rex_clang->getId() ."][citation]", $staff->citation, 5, FALSE, $readonly_lang, TRUE);

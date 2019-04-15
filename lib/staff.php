@@ -39,6 +39,11 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 	var $name = "";
 	
 	/**
+	 * @var string Language specific name
+	 */
+	var $lang_name = "";
+	
+	/**
 	 * @var string Online status, either "online" or "offline".
 	 */
 	var $online_status = "offline";
@@ -86,6 +91,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 			$this->citation = stripslashes(htmlspecialchars_decode($result->getValue("citation")));
 			$this->area_of_responsibility = $result->getValue("area_of_responsibility");
 			$this->name = stripslashes($result->getValue("name"));
+			$this->lang_name = stripslashes($result->getValue("lang_name"));
 			$this->online_status = $result->getValue("online_status");
 			if($result->getValue("picture") != "") {
 				$this->picture = $result->getValue("picture");
@@ -259,6 +265,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 				$query = "REPLACE INTO ". rex::getTablePrefix() ."d2u_staff_lang SET "
 						."staff_id = ". $this->staff_id .", "
 						."clang_id = ". $this->clang_id .", "
+						."lang_name = '". addslashes($this->lang_name) ."', "
 						."area_of_responsibility = '". $this->area_of_responsibility ."', "
 						."citation = '". addslashes(htmlspecialchars($this->citation)) ."', "
 						."position = '". $this->position ."', "

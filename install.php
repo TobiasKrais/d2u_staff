@@ -14,6 +14,7 @@ $sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff
 $sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff_lang` (
     `staff_id` int(10) NOT NULL,
     `clang_id` int(10) NOT NULL,
+    `lang_name` varchar(255) collate utf8mb4_unicode_ci default NULL,
     `area_of_responsibility` varchar(255) collate utf8mb4_unicode_ci default NULL,
     `position` varchar(255) collate utf8mb4_unicode_ci default NULL,
     `citation` text collate utf8mb4_unicode_ci default NULL,
