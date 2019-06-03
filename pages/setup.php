@@ -28,9 +28,19 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.0.2-DEV:</p>
+<p>1.0.3-DEV:</p>
 <ul>
-	<li>Feld "Sprachspezifischer Name" hnzugefügt (ermöglicht die Eingabe eines Namens in kyrillischen, arabischen, ... Buchstaben).</li>
+	<li>Feld "Sprachspezifischer Name" hinzugefügt (ermöglicht die Eingabe eines Namens in kyrillischen, arabischen, ... Buchstaben).</li>
+	<li>Nicht benötigte "updatedate" Felder in Datenbank entfernt.</li>
+	<li>Listen im Backend werden jetzt nicht mehr in Seiten unterteilt.</li>
+	<li>Konvertierung der Datenbanktabellen zu utf8mb4.</li>
+	<li>Bugfix beim Löschen einer Sprache.</li>
+	<li>Sprachdetails werden ausgeblendet, wenn Speicherung der Sprache nicht vorgesehen ist.</li>
+	<li>Bugfix: Prioritäten wurden beim Löschen nicht reorganisiert.</li>
+</ul>
+<p>1.0.2:</p>
+<ul>
+	<li>Feld "Sprachspezifischer Name" hinzugefügt (ermöglicht die Eingabe eines Namens in kyrillischen, arabischen, ... Buchstaben).</li>
 	<li>Nicht benötigte "updatedate" Felder in Datenbank entfernt.</li>
 	<li>Listen im Backend werden jetzt nicht mehr in Seiten unterteilt.</li>
 	<li>Konvertierung der Datenbanktabellen zu utf8mb4.</li>
