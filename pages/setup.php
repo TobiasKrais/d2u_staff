@@ -30,6 +30,7 @@ $d2u_module_manager->showManagerList();
 <h2>Changelog</h2>
 <p>1.0.3-DEV:</p>
 <ul>
+	<li>Backend: Einstellungen und Setup Tabs rechts eingeordnet um sie vom Inhalt besser zu unterscheiden.</li>
 	<li>Feld "Sprachspezifischer Name" hinzugefügt (ermöglicht die Eingabe eines Namens in kyrillischen, arabischen, ... Buchstaben).</li>
 	<li>Nicht benötigte "updatedate" Felder in Datenbank entfernt.</li>
 	<li>Listen im Backend werden jetzt nicht mehr in Seiten unterteilt.</li>

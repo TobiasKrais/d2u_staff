@@ -8,7 +8,7 @@ page:
     icon: rex-icon fa-user-circle
     subpages:
         staff: { title: 'translate:d2u_staff', icon: rex-icon fa-user-circle }
-        setup: { title: 'translate:d2u_helper_setup', icon: rex-icon rex-icon-install, perm: d2u_staff[settings] }
+        setup: { title: 'translate:d2u_helper_setup', icon: rex-icon rex-icon-install, itemclass: pull-right, perm: d2u_staff[settings] }
 
 requires:
     packages:
