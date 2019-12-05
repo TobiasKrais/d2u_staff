@@ -28,6 +28,10 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
+<p>1.0.4:</p>
+<ul>
+	<li>...</li>
+</ul>
 <p>1.0.3:</p>
 <ul>
 	<li>Backend: Einstellungen und Setup Tabs rechts eingeordnet um sie vom Inhalt besser zu unterscheiden.</li>
