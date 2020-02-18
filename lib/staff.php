@@ -236,7 +236,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 
 		if($this->staff_id == 0 || $pre_save_staff != $this) {
 			$query = rex::getTablePrefix() ."d2u_staff SET "
-					."article_id = ". ($this->article_id > 0 ? $this->article_id : 0) .", "
+					."article_id = ". ($this->article_id ?: 0) .", "
 					."online_status = '". $this->online_status ."', "
 					."picture = '". $this->picture ."', "
 					."priority = '". $this->priority ."', "
