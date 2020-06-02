@@ -31,6 +31,7 @@ $d2u_module_manager->showManagerList();
 <p>1.0.4:</p>
 <ul>
 	<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version verwendet wird.</li>
+	<li>Modul 22-1 "D2U Mitarbeiter - Liste". Eingabefelder nun im Redaxo Stil.</li>
 </ul>
 <p>1.0.3:</p>
 <ul>
