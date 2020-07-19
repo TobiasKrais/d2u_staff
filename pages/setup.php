@@ -28,7 +28,7 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.0.4:</p>
+<p>1.0.4-DEV:</p>
 <ul>
 	<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version verwendet wird.</li>
 	<li>Modul 22-1 "D2U Mitarbeiter - Liste". Eingabefelder nun im Redaxo Stil.</li>
