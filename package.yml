@@ -9,8 +9,10 @@ page:
     subpages:
         staff: { title: 'translate:d2u_staff', icon: rex-icon fa-user-circle }
         setup: { title: 'translate:d2u_helper_setup', icon: rex-icon rex-icon-install, itemclass: pull-right, perm: d2u_staff[settings] }
+        settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, itemclass: pull-right, perm: d2u_staff[settings] }
 
 requires:
     redaxo: '>=5.10.0'
     packages:
         d2u_helper: '>=1.5.5'
+        sprog: '>=1.0.0'
