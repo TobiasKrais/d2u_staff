@@ -1,13 +1,6 @@
-.module-box {
-	border: 1px solid article_color_h;
-	padding: 15px;
-}
-.module-box .author-head {
+.module-box-short .author-head {
 	padding-bottom: 15px;
 }
-.module-box .author-image {
-	text-align: center;
-}
-.module-box img {
+.module-box-short img {
 	border-radius: 100px;
 }

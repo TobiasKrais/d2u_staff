@@ -16,7 +16,7 @@
 
 	// Output
 	print '<div class="'. $position_container_classes .'">';
-	print '<div class="module-box">';
+	print '<div class="module-box-short">';
 	print '<div class="row align-items-center">';
 	print '<div class="col-3 col-md-2 author-image">';
 	$link_start = '';
