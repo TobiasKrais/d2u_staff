@@ -186,6 +186,35 @@ class Staff implements \D2U_Helper\ITranslationHelper {
     }
 	
 	/**
+	 * Gets all staffs with citation.
+	 * @param int $clang_id Redaxo language ID
+	 * @param boolean $online_only If TRUE, only online objects are returned.
+	 * @return Staff[] Array with Staff objects.
+	 */
+	public static function getAllWithCitation($clang_id, $online_only = TRUE) {
+		$query = 'SELECT lang.staff_id FROM '. rex::getTablePrefix() .'d2u_staff_lang AS lang '
+			.'LEFT JOIN '. rex::getTablePrefix() .'d2u_staff AS staff '
+				.'ON lang.staff_id = staff.staff_id '
+			.'WHERE clang_id = '. $clang_id .' AND citation != "" ';
+		if($online_only) {
+			$query .= 'AND online_status = "online" ';
+		}
+		$query .= 'ORDER BY priority ASC';
+		$result = rex_sql::factory();
+		$result->setQuery($query);
+		$num_rows = $result->getRows();
+
+		$staffs = [];
+		for($i = 0; $i < $num_rows; $i++) {
+			$staff = new Staff($result->getValue("staff_id"), $clang_id);
+			$staffs[$staff->staff_id] = $staff;
+			$result->next();
+		}
+		
+		return $staffs;
+    }
+
+	/**
 	 * Get objects concerning translation updates
 	 * @param int $clang_id Redaxo language ID
 	 * @param string $type 'update' or 'missing'
