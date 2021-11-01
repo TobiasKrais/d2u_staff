@@ -199,7 +199,7 @@ if ($func == 'edit' || $func == 'add') {
 }
 
 if ($func == '') {
-	$query = 'SELECT staff.staff_id, name, position, priority, online_status '
+	$query = 'SELECT staff.staff_id, name, position, citation, priority, online_status '
 		. 'FROM '. rex::getTablePrefix() .'d2u_staff AS staff '
 		. 'LEFT JOIN '. rex::getTablePrefix() .'d2u_staff_lang AS lang '
 			. 'ON staff.staff_id = lang.staff_id AND lang.clang_id = '. rex_config::get("d2u_helper", "default_lang", rex_clang::getStartId()) .' '
@@ -223,6 +223,16 @@ if ($func == '') {
     $list->setColumnParams('name', ['func' => 'edit', 'entry_id' => '###staff_id###']);
 
     $list->setColumnLabel('position', rex_i18n::msg('d2u_staff_position'));
+   
+    $list->setColumnLabel('citation', rex_i18n::msg('d2u_staff_citation'));
+	$list->setColumnFormat('citation', 'custom', function ($params) {
+		$list_params = $params['list'];
+		$citation = stripslashes(htmlspecialchars_decode($list_params->getValue('citation')));
+		if(strlen($citation) > 50) {
+			$citation = substr($citation, 0, 50) . "...";
+		}
+		return $citation;
+	});
    
     $list->setColumnLabel('priority', rex_i18n::msg('header_priority'));
 

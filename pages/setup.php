@@ -30,6 +30,7 @@ $d2u_module_manager->showManagerList();
 <h2>Changelog</h2>
 <p>1.0.4-DEV:</p>
 <ul>
+	<li>Ausschnitt der Zitate werden jetzt in der Übersichtsliste angezeigt.</li>
 	<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version verwendet wird.</li>
 	<li>Modul 22-1 "D2U Mitarbeiter - Liste". Eingabefelder nun im Redaxo Stil.</li>
 	<li>Neues Modul 22-2 "D2U Mitarbeiter - Autorenbox Detailinfo". Für einen Redaxo Artikel kann eine Autorenbox ausgegeben werden. Dabei werden die Autoreninformationen auch im Google kompatiblen LD+JSON Format ausgegeben.</li>
