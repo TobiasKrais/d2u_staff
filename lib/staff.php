@@ -6,67 +6,72 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 	/**
 	 * @var int Staff database ID
 	 */
-	var $staff_id = 0;
+	var int $staff_id = 0;
 	
 	/**
 	 * @var int Redaxo Language ID
 	 */
-	var $clang_id = 0;
+	var int $clang_id = 0;
 
 	/**
 	 * @var int Address ID
 	 */
-	var $address_id = 0;
+	var int $company_id = 0;
 	
 	/**
 	 * @var int Redaxo article ID with detailed information
 	 */
-	var $article_id = 0;
+	var int $article_id = 0;
 	
 	/**
 	 * @var string Citation
 	 */
-	var $citation = "";
+	var string $citation = "";
 	
 	/**
 	 * @var string Name of countries staff is responsible for
 	 */
-	var $area_of_responsibility = "";
+	var string $area_of_responsibility = "";
 	
 	/**
 	 * @var string name
 	 */
-	var $name = "";
+	var string $name = "";
 	
 	/**
 	 * @var string Language specific name
 	 */
-	var $lang_name = "";
+	var string $lang_name = "";
+	
+	/**
+	 * @var string special knowledge
+	 */
+	var string $knows_about = "";
 	
 	/**
 	 * @var string Online status, either "online" or "offline".
 	 */
-	var $online_status = "offline";
+	var string $online_status = "offline";
 	
 	/**
 	 * @var string Picture
 	 */
-	var $picture = "";
+	var string $picture = "";
 	
 	/**
 	 * @var string Postion in company
 	 */
-	var $position = "";
+	var string $position = "";
 		
 	/**
 	 * @var int priority
 	 */
-	var $priority = 0;
+	var int $priority = 0;
 
 	/**
 	 * @var string "yes" if translation needs update
 	 */
-	var $translation_needs_update = "delete";
+	var string $translation_needs_update = "delete";
 	
 	/**
 	 * Constructor
@@ -86,12 +91,13 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 
 		if ($num_rows > 0) {
 			$this->staff_id = $result->getValue("staff_id");
-			$this->address_id = $result->getValue("address_id");
+			$this->company_id = $result->getValue("company_id");
 			$this->article_id = $result->getValue("article_id");
 			$this->citation = stripslashes(htmlspecialchars_decode($result->getValue("citation")));
 			$this->area_of_responsibility = $result->getValue("area_of_responsibility");
 			$this->name = stripslashes($result->getValue("name"));
 			$this->lang_name = stripslashes($result->getValue("lang_name"));
+			$this->knows_about = stripslashes($result->getValue("knows_about"));
 			$this->online_status = $result->getValue("online_status");
 			if($result->getValue("picture") != "") {
 				$this->picture = $result->getValue("picture");
@@ -270,7 +276,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 					."picture = '". $this->picture ."', "
 					."priority = '". $this->priority ."', "
 					."name = '". addslashes($this->name) ."', "
-					."address_id = ". $this->address_id;
+					."company_id = ". $this->company_id;
 
 			if($this->staff_id == 0) {
 				$query = "INSERT INTO ". $query;
@@ -295,6 +301,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 						."staff_id = ". $this->staff_id .", "
 						."clang_id = ". $this->clang_id .", "
 						."lang_name = '". addslashes($this->lang_name) ."', "
+						."knows_about = '". addslashes($this->knows_about) ."', "
 						."area_of_responsibility = '". $this->area_of_responsibility ."', "
 						."citation = '". addslashes(htmlspecialchars($this->citation)) ."', "
 						."position = '". $this->position ."', "

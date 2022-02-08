@@ -1,13 +1,17 @@
 d2u_staff = D2U Mitarbeiter
 d2u_staff_area_of_responsibility = Zuständigkeitsbereich
-d2u_staff_citation = Zitat / Info
-d2u_staff_company = Arbeitgeber aus D2U Adressen Addon
+d2u_staff_citation = Info
+d2u_staff_company = Unternehmen
+d2u_staff_knows_about = Kenntnisse
 d2u_staff_lang_name = Sprachspezifischer Name (optional)
+d2u_staff_logo = Logo
 d2u_staff_no_link = Keine Verknüpfung
+d2u_staff_no_company_found = Es wurden noch keine Unternehmen angelegt.
 d2u_staff_no_staff_found = Es wurden noch keine Mitarbeiter angelegt.
 d2u_staff_picture = Bild
 d2u_staff_position = Position
 d2u_staff_staff = Mitarbeiter
+d2u_staff_url = URL
 
 d2u_staff_rights = D2U Mitarbeiter Addon
 d2u_staff_rights_edit_data = D2U Mitarbeiter Addon: Editierrechte für Daten und sprachübergreifende Inhalte

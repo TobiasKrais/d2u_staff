@@ -57,24 +57,48 @@
 	print '</div>';
 	
 	$article = rex_article::getCurrent();
+	$current_domain_with_scheme = rtrim(rex_yrewrite::getFullPath(), '/');
 ?>
 <script type="application/ld+json">
-    {
+	{
 		"@context": "https://schema.org/",
-		"@type": "WebPage",
-		"name": "<?= addslashes(strip_tags($article->getName())); ?>",
+		"@type": "Article",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "<?= rex_yrewrite::getFullUrlByArticleId($article->getId(), rex_clang::getCurrentId()); ?>"
+		},
 		"author": {
 			"@type": "Person",
-			"name": "<?= addslashes(strip_tags($author->lang_name != "" ? $author->lang_name : $author->name)); ?>",
-			<?= ($author->article_id > 0 ? '"url": "'. rex_getUrl($author->article_id).'",' : ''); ?>
-			"image":{
+			"name": "<?= addslashes(html_entity_decode(strip_tags($author->lang_name != "" ? $author->lang_name : $author->name))); ?>",
+			"description": "<?= addslashes(html_entity_decode(strip_tags($author->citation))); ?>",
+			"knowsAbout": "<?= addslashes(html_entity_decode(strip_tags($author->knows_about))); ?>",
+			"url": "<?= ($author->article_id > 0 ? rex_getUrl($author->article_id) : $current_domain_with_scheme); ?>",
+			"image": {
 				"@type":"ImageObject",
-				"url":"<?= rex_url::media($author->picture); ?>",
-				"caption":"<?= addslashes(strip_tags($author->lang_name != "" ? $author->lang_name : $author->name)); ?>"
-			},
-			"description":"<?= addslashes(strip_tags($author->citation)); ?>"
+				"url":"<?= $current_domain_with_scheme . rex_url::media($author->picture); ?>",
+				"caption":"<?= addslashes(html_entity_decode(strip_tags($author->lang_name != "" ? $author->lang_name : $author->name))); ?>"
+			}
 		},
-		"datePublished": "<?= date('c', $article->getUpdateDate()); ?>",
-		"description": "<?= addslashes(strip_tags($article->getValue('description'))); ?>"
-    }
+		<?php
+		if($author->company_id) {
+			$company = new \D2U_Staff\Company($author->company_id);
+			if($company->company_id) {
+		?>"publisher": {
+			"@type": "Organization",
+			"name": "<?= addslashes(html_entity_decode($company->name)); ?>",
+			"url": "<?= $company->url; ?>",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "<?= $current_domain_with_scheme . rex_url::media($company->logo); ?>"
+			}
+		},
+		<?php
+			}
+		}
+		?>"headline": "<?= addslashes(strip_tags($article->getName())); ?>",
+		"description": "<?= addslashes(strip_tags($article->getValue('yrewrite_description'))); ?>",
+		"image": "<?= ($article->getValue('yrewrite_image') ? $current_domain_with_scheme . rex_url::media($article->getValue('yrewrite_image')) : ''); ?>",
+		"datePublished": "<?= date('c', $article->getCreateDate()); ?>",
+		"dateModified" : "<?= date('c', $article->getUpdateDate()); ?>"
+	}
 </script>

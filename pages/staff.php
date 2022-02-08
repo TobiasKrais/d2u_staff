@@ -23,9 +23,7 @@ if (filter_input(INPUT_POST, "btn_save") == 1 || filter_input(INPUT_POST, "btn_a
 		if($staff === FALSE) {
 			$staff = new Staff($staff_id, $rex_clang->getId());
 			$staff->staff_id = $staff_id; // Ensure correct ID in case first language has no object
-			if(\rex_addon::get("d2u_address")->isAvailable() && isset($form['address_id'])) {
-				$staff->address_id = $form['address_id'];
-			}
+			$staff->company_id = $form['company_id'];
 			$staff->article_id = $input_link['article_id'];
 			$staff->name = $form['name'];
 			$staff->online_status = array_key_exists('online_status', $form) ? "online" : "offline";
@@ -39,6 +37,7 @@ if (filter_input(INPUT_POST, "btn_save") == 1 || filter_input(INPUT_POST, "btn_a
 		$staff->citation = $form['lang'][$rex_clang->getId()]['citation'];
 		$staff->position = $form['lang'][$rex_clang->getId()]['position'];
 		$staff->lang_name = $form['lang'][$rex_clang->getId()]['lang_name'];
+		$staff->knows_about = $form['lang'][$rex_clang->getId()]['knows_about'];
 		$staff->translation_needs_update = $form['lang'][$rex_clang->getId()]['translation_needs_update'];
 		
 		if($staff->translation_needs_update == "delete") {
@@ -61,10 +60,10 @@ if (filter_input(INPUT_POST, "btn_save") == 1 || filter_input(INPUT_POST, "btn_a
 	
 	// Redirect to make reload and thus double save impossible
 	if(filter_input(INPUT_POST, "btn_apply") == 1 && $staff !== FALSE) {
-		header("Location: ". rex_url::currentBackendPage(array("entry_id"=>$staff->staff_id, "func"=>'edit', "message"=>$message), FALSE));
+		header("Location: ". rex_url::currentBackendPage(["entry_id"=>$staff->staff_id, "func"=>'edit', "message"=>$message], FALSE));
 	}
 	else {
-		header("Location: ". rex_url::currentBackendPage(array("message"=>$message), FALSE));
+		header("Location: ". rex_url::currentBackendPage(["message"=>$message], FALSE));
 	}
 	exit;
 }
@@ -104,7 +103,6 @@ if ($func == 'edit' || $func == 'add') {
 					<legend><?php echo rex_i18n::msg('d2u_helper_data_all_lang'); ?></legend>
 					<div class="panel-body-wrapper slide">
 						<?php
-							// Do not use last object from translations, because you don't know if it exists in DB
 							$staff = new Staff($entry_id, rex_config::get("d2u_helper", "default_lang"));
 							$readonly = TRUE;
 							if(rex::getUser()->isAdmin() || rex::getUser()->hasPerm('d2u_staff[edit_data]')) {
@@ -114,13 +112,11 @@ if ($func == 'edit' || $func == 'add') {
 							d2u_addon_backend_helper::form_input('d2u_helper_name', "form[name]", $staff->name, TRUE, $readonly);
 							d2u_addon_backend_helper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
 							d2u_addon_backend_helper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', $staff->online_status == "online", $readonly);
-							if(\rex_addon::get("d2u_address")->isAvailable()) {
-								$options = [0 => rex_i18n::msg('d2u_staff_no_link')];
-								foreach(\D2U_Address\Address::getAll(rex_config::get("d2u_helper", "default_lang"), FALSE, FALSE) as $address) {
-									$options[$address->address_id] = $address->company;
-								}
-								d2u_addon_backend_helper::form_select('d2u_staff_company', 'form[address_id]', $options, [$staff->address_id], 1, FALSE, $readonly);
+							$options = [0 => rex_i18n::msg('d2u_staff_no_link')];
+							foreach(\D2U_Staff\Company::getAll() as $company) {
+								$options[$company->company_id] = $company->name;
 							}
+							d2u_addon_backend_helper::form_select('d2u_staff_company', 'form[company_id]', $options, [$staff->company_id], 1, FALSE, $readonly);
 							d2u_addon_backend_helper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, rex_config::get("d2u_helper", "default_lang"), $readonly);
 							d2u_addon_backend_helper::form_input('header_priority', 'form[priority]', $staff->priority, TRUE, $readonly, 'number');
 						?>
@@ -168,6 +164,7 @@ if ($func == 'edit' || $func == 'add') {
 									d2u_addon_backend_helper::form_input('d2u_staff_area_of_responsibility', "form[lang][". $rex_clang->getId() ."][area_of_responsibility]", $staff->area_of_responsibility, FALSE, $readonly_lang);
 									d2u_addon_backend_helper::form_input('d2u_staff_position', "form[lang][". $rex_clang->getId() ."][position]", $staff->position, FALSE, $readonly_lang);
 									d2u_addon_backend_helper::form_textarea('d2u_staff_citation', "form[lang][". $rex_clang->getId() ."][citation]", $staff->citation, 5, FALSE, $readonly_lang, TRUE);
+									d2u_addon_backend_helper::form_input('d2u_staff_knows_about', "form[lang][". $rex_clang->getId() ."][knows_about]", $staff->knows_about, FALSE, $readonly_lang);
 								?>
 							</div>
 						</div>

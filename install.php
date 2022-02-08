@@ -1,23 +1,60 @@
 <?php
-$sql = rex_sql::factory();
-// Install database
-$sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff` (
-    `staff_id` int(10) unsigned NOT NULL auto_increment,
-    `name` varchar(255) collate utf8mb4_unicode_ci default NULL,
-    `picture` varchar(255) collate utf8mb4_unicode_ci default NULL,
-    `online_status` varchar(10) collate utf8mb4_unicode_ci default NULL,
-    `address_id` int(10) NULL default NULL,
-    `article_id` int(10) NULL default NULL,
-    `priority` int(11) NULL default NULL,
-    PRIMARY KEY (`staff_id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;");
-$sql->setQuery("CREATE TABLE IF NOT EXISTS `". rex::getTablePrefix() ."d2u_staff_lang` (
-    `staff_id` int(10) NOT NULL,
-    `clang_id` int(10) NOT NULL,
-    `lang_name` varchar(255) collate utf8mb4_unicode_ci default NULL,
-    `area_of_responsibility` varchar(255) collate utf8mb4_unicode_ci default NULL,
-    `position` varchar(255) collate utf8mb4_unicode_ci default NULL,
-    `citation` text collate utf8mb4_unicode_ci default NULL,
-	`translation_needs_update` varchar(6) collate utf8mb4_unicode_ci default NULL,
-    PRIMARY KEY (`staff_id`, `clang_id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1;");
+\rex_sql_table::get(\rex::getTable('d2u_staff'))
+	->ensureColumn(new rex_sql_column('staff_id', 'INT(11) unsigned', false, null, 'auto_increment'))
+	->setPrimaryKey('staff_id')
+	->ensureColumn(new \rex_sql_column('name', 'VARCHAR(255)', true))
+    ->ensureColumn(new \rex_sql_column('picture', 'VARCHAR(255)', true))
+    ->ensureColumn(new \rex_sql_column('online_status', 'VARCHAR(10)', true))
+    ->ensureColumn(new \rex_sql_column('company_id', 'INT(11)', false, 0))
+    ->ensureColumn(new \rex_sql_column('article_id', 'INT(11)', true))
+    ->ensureColumn(new \rex_sql_column('priority', 'INT(11)', true))
+    ->ensureColumn(new \rex_sql_column('updatedate', 'DATETIME'))
+    ->ensure();
+\rex_sql_table::get(\rex::getTable('d2u_staff_lang'))
+	->ensureColumn(new rex_sql_column('staff_id', 'INT(11) unsigned', false, null, 'auto_increment'))
+    ->ensureColumn(new \rex_sql_column('clang_id', 'INT(11)', false, 1))
+	->setPrimaryKey(['staff_id', 'clang_id'])
+    ->ensureColumn(new \rex_sql_column('lang_name', 'VARCHAR(255)'))
+    ->ensureColumn(new \rex_sql_column('knows_about', 'VARCHAR(255)'))
+    ->ensureColumn(new \rex_sql_column('area_of_responsibility', 'VARCHAR(255)'))
+    ->ensureColumn(new \rex_sql_column('position', 'VARCHAR(255)', true))
+    ->ensureColumn(new \rex_sql_column('citation', 'TEXT', true))
+    ->ensureColumn(new \rex_sql_column('translation_needs_update', 'VARCHAR(7)'))
+    ->ensure();
+
+\rex_sql_table::get(\rex::getTable('d2u_staff_company'))
+	->ensureColumn(new rex_sql_column('company_id', 'INT(11) unsigned', false, null, 'auto_increment'))
+	->setPrimaryKey('company_id')
+	->ensureColumn(new \rex_sql_column('name', 'VARCHAR(255)', true))
+    ->ensureColumn(new \rex_sql_column('url', 'VARCHAR(255)', true))
+    ->ensureColumn(new \rex_sql_column('logo', 'VARCHAR(255)', true))
+    ->ensure();
+
+// Remove old column
+\rex_sql_table::get(
+    \rex::getTable('d2u_staff'))
+    ->removeColumn('address_id')
+    ->ensure();
+
+// Update modules
+if(class_exists('D2UModuleManager')) {
+	$modules = [];
+	$modules[] = new D2UModule("22-1",
+		"D2U Mitarbeiter - Liste",
+		3);
+	$modules[] = new D2UModule("22-2",
+		"D2U Mitarbeiter - Autorenbox Detailinfo",
+		1);
+	$modules[] = new D2UModule("22-3",
+		"D2U Mitarbeiter - Autorenbox Kurzinfo",
+		1);
+	$d2u_module_manager = new D2UModuleManager($modules, "", "d2u_staff");
+	$d2u_module_manager->autoupdate();
+}
+
+// Update language replacements
+if(!class_exists('d2u_staff_lang_helper')) {
+	// Load class in case addon is deactivated
+	require_once 'lib/d2u_staff_lang_helper.php';
+}
+d2u_staff_lang_helper::factory()->install();

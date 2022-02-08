@@ -28,9 +28,10 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.0.4-DEV:</p>
+<p>1.1.0-DEV:</p>
 <ul>
 	<li>Bugfix: Beim Löschen von Medien die vom Addon verlinkt werden wurde der Name der verlinkenden Quelle in der Warnmeldung nicht immer korrekt angegeben.</li>
+	<li>Verknüpfung zum D2U Adressen Addon entfernt und statt dessen eigene Tabelle für Unternehmen hinzugefügt.</li>
 	<li>Ausschnitt der Zitate werden jetzt in der Übersichtsliste angezeigt.</li>
 	<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version verwendet wird.</li>
 	<li>Modul 22-1 "D2U Mitarbeiter - Liste". Eingabefelder nun im Redaxo Stil.</li>
