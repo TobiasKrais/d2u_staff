@@ -25,6 +25,7 @@ if (filter_input(INPUT_POST, "btn_save") == 1 || filter_input(INPUT_POST, "btn_a
 			$staff->staff_id = $staff_id; // Ensure correct ID in case first language has no object
 			$staff->company_id = $form['company_id'];
 			$staff->article_id = $input_link['article_id'];
+			$staff->gender = $form['gender'];
 			$staff->name = $form['name'];
 			$staff->online_status = array_key_exists('online_status', $form) ? "online" : "offline";
 			$staff->picture = $input_media[1];
@@ -110,6 +111,12 @@ if ($func == 'edit' || $func == 'add') {
 							}
 							
 							d2u_addon_backend_helper::form_input('d2u_helper_name', "form[name]", $staff->name, TRUE, $readonly);
+							$options_gender = [
+								'male' => rex_i18n::msg('d2u_staff_gender_male'),
+								'female' => rex_i18n::msg('d2u_staff_gender_female'),
+								'divers' => rex_i18n::msg('d2u_staff_gender_divers')
+							];
+							d2u_addon_backend_helper::form_select('d2u_staff_gender', 'form[gender]', $options_gender, [$staff->gender], 1, FALSE, $readonly);
 							d2u_addon_backend_helper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
 							d2u_addon_backend_helper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', $staff->online_status == "online", $readonly);
 							$options = [0 => rex_i18n::msg('d2u_staff_no_link')];

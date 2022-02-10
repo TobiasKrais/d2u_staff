@@ -71,6 +71,7 @@
 			"@type": "Person",
 			"name": "<?= addslashes(html_entity_decode(strip_tags($author->lang_name != "" ? $author->lang_name : $author->name))); ?>",
 			"description": "<?= addslashes(html_entity_decode(strip_tags($author->citation))); ?>",
+		    "gender": "<?= $author->gender; ?>",
 			"knowsAbout": "<?= addslashes(html_entity_decode(strip_tags($author->knows_about))); ?>",
 			"url": "<?= ($author->article_id > 0 ? rex_getUrl($author->article_id) : $current_domain_with_scheme); ?>",
 			"image": {

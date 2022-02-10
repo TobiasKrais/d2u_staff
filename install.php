@@ -3,6 +3,7 @@
 	->ensureColumn(new rex_sql_column('staff_id', 'INT(11) unsigned', false, null, 'auto_increment'))
 	->setPrimaryKey('staff_id')
 	->ensureColumn(new \rex_sql_column('name', 'VARCHAR(255)', true))
+    ->ensureColumn(new \rex_sql_column('gender', 'VARCHAR(10)', true))
     ->ensureColumn(new \rex_sql_column('picture', 'VARCHAR(255)', true))
     ->ensureColumn(new \rex_sql_column('online_status', 'VARCHAR(10)', true))
     ->ensureColumn(new \rex_sql_column('company_id', 'INT(11)', false, 0))
