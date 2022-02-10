@@ -28,7 +28,7 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.1.0-DEV:</p>
+<p>1.1.0:</p>
 <ul>
 	<li>Bugfix: Beim Löschen von Medien die vom Addon verlinkt werden wurde der Name der verlinkenden Quelle in der Warnmeldung nicht immer korrekt angegeben.</li>
 	<li>Verknüpfung zum D2U Adressen Addon entfernt und statt dessen eigene Tabelle für Unternehmen hinzugefügt.</li>
