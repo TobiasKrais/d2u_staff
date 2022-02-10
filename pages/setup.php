@@ -15,9 +15,6 @@ if($d2u_module_id != "") {
 // D2UModuleManager show list
 $d2u_module_manager->showManagerList();
 
-/*
- * Templates
- */
 ?>
 <h2>Beispielseiten</h2>
 <ul>
@@ -28,6 +25,10 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
+<p>1.1.1:</p>
+<ul>
+	<li>Anpassungen an Publish-Release-to-Redaxo.</li>
+</ul>
 <p>1.1.0:</p>
 <ul>
 	<li>Bugfix: Beim Löschen von Medien die vom Addon verlinkt werden wurde der Name der verlinkenden Quelle in der Warnmeldung nicht immer korrekt angegeben.</li>
