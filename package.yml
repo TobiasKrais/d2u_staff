@@ -19,3 +19,6 @@ requires:
         sprog: '>=1.0.0'
     php:
         version: '>=7.4'
+        
+installer_ignore:
+    - .github
