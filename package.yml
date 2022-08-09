@@ -13,12 +13,11 @@ page:
         settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, itemclass: pull-right, perm: 'd2u_staff[settings]' }
 
 requires:
+    php: '>=7.4'
     redaxo: '>=5.10.0'
     packages:
         d2u_helper: '>=1.5.5'
         sprog: '>=1.0.0'
-    php:
-        version: '>=7.4'
         
 installer_ignore:
     - .github
