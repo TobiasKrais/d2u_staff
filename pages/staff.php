@@ -75,7 +75,7 @@ else if(filter_input(INPUT_POST, "btn_delete") == 1 || $func == 'delete') {
 		$form = (array) rex_post('form', 'array', []);
 		$staff_id = $form['staff_id'];
 	}
-	$staff = new Staff($staff_id, rex_config::get("d2u_helper", "default_lang"));
+	$staff = new Staff($staff_id, intval(rex_config::get("d2u_helper", "default_lang")));
 	$staff->staff_id = $staff_id; // Ensure correct ID in case language has no object
 	$staff->delete();
 	
@@ -84,7 +84,7 @@ else if(filter_input(INPUT_POST, "btn_delete") == 1 || $func == 'delete') {
 // Change online status of staff
 else if($func == 'changestatus') {
 	$staff_id = $entry_id;
-	$staff = new Staff($staff_id, rex_config::get("d2u_helper", "default_lang"));
+	$staff = new Staff($staff_id, intval(rex_config::get("d2u_helper", "default_lang")));
 	$staff->staff_id = $staff_id; // Ensure correct ID in case language has no object
 	$staff->changeStatus();
 	
@@ -104,7 +104,7 @@ if ($func == 'edit' || $func == 'add') {
 					<legend><?php echo rex_i18n::msg('d2u_helper_data_all_lang'); ?></legend>
 					<div class="panel-body-wrapper slide">
 						<?php
-							$staff = new Staff($entry_id, rex_config::get("d2u_helper", "default_lang"));
+							$staff = new Staff($entry_id, intval(rex_config::get("d2u_helper", "default_lang")));
 							$readonly = TRUE;
 							if(rex::getUser()->isAdmin() || rex::getUser()->hasPerm('d2u_staff[edit_data]')) {
 								$readonly = FALSE;
@@ -124,7 +124,7 @@ if ($func == 'edit' || $func == 'add') {
 								$options[$company->company_id] = $company->name;
 							}
 							d2u_addon_backend_helper::form_select('d2u_staff_company', 'form[company_id]', $options, [$staff->company_id], 1, FALSE, $readonly);
-							d2u_addon_backend_helper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, rex_config::get("d2u_helper", "default_lang"), $readonly);
+							d2u_addon_backend_helper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, intval(rex_config::get("d2u_helper", "default_lang")), $readonly);
 							d2u_addon_backend_helper::form_input('header_priority', 'form[priority]', $staff->priority, TRUE, $readonly, 'number');
 						?>
 					</div>
@@ -132,7 +132,7 @@ if ($func == 'edit' || $func == 'add') {
 				<?php
 					foreach(rex_clang::getAll() as $rex_clang) {
 						$staff = new Staff($entry_id, $rex_clang->getId());
-						$required = $rex_clang->getId() == rex_config::get("d2u_helper", "default_lang") ? TRUE : FALSE;
+						$required = $rex_clang->getId() === intval(rex_config::get("d2u_helper", "default_lang")) ? TRUE : FALSE;
 						
 						$readonly_lang = TRUE;
 						if(rex::getUser()->isAdmin() || (rex::getUser()->hasPerm('d2u_staff[edit_lang]') && rex::getUser()->getComplexPerm('clang')->hasPerm($rex_clang->getId()))) {
@@ -143,7 +143,7 @@ if ($func == 'edit' || $func == 'add') {
 						<legend><?php echo rex_i18n::msg('d2u_helper_text_lang') .' "'. $rex_clang->getName() .'"'; ?></legend>
 						<div class="panel-body-wrapper slide">
 							<?php
-								if($rex_clang->getId() != rex_config::get("d2u_helper", "default_lang")) {
+								if($rex_clang->getId() !== intval(rex_config::get("d2u_helper", "default_lang"))) {
 									$options_translations = [];
 									$options_translations["yes"] = rex_i18n::msg('d2u_helper_translation_needs_update');
 									$options_translations["no"] = rex_i18n::msg('d2u_helper_translation_is_uptodate');
