@@ -103,7 +103,7 @@ class Company {
 				."url = '". $this->url ."', "
 				."logo = '". $this->logo ."' ";
 
-		if($this->company_id == 0) {
+		if($this->company_id === 0) {
 			$query = "INSERT INTO ". $query;
 		}
 		else {
@@ -112,8 +112,8 @@ class Company {
 
 		$result = \rex_sql::factory();
 		$result->setQuery($query);
-		if($this->company_id == 0) {
-			$this->company_id = $result->getLastId();
+		if($this->company_id === 0) {
+			$this->company_id = intval($result->getLastId());
 			$error = $result->hasError();
 		}
 		

@@ -117,8 +117,8 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 	/**
 	 * Changes the online status of this object
 	 */
-	public function changeStatus() {
-		if($this->online_status == "online") {
+	public function changeStatus():void {
+		if($this->online_status === "online") {
 			if($this->staff_id > 0) {
 				$query = "UPDATE ". rex::getTablePrefix() ."d2u_staff "
 					."SET online_status = 'offline' "
@@ -142,10 +142,10 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 
 	/**
 	 * Deletes the object in all languages.
-	 * @param int $delete_all If TRUE, all translations and main object are deleted. If 
-	 * FALSE, only this translation will be deleted.
+	 * @param bool $delete_all If true, all translations and main object are deleted. If 
+	 * false, only this translation will be deleted.
 	 */
-	public function delete($delete_all = TRUE) {
+	public function delete($delete_all = true):void {
 		$query_lang = "DELETE FROM ". rex::getTablePrefix() ."d2u_staff_lang "
 			."WHERE staff_id = ". $this->staff_id
 			. ($delete_all ? '' : ' AND clang_id = '. $this->clang_id) ;
@@ -164,17 +164,17 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 			$result->setQuery($query);
 
 			// reset priorities
-			$this->setPriority(TRUE);			
+			$this->setPriority(true);			
 		}
 	}
 
 	/**
 	 * Gets all staffs.
 	 * @param int $clang_id Redaxo language ID
-	 * @param boolean $online_only If TRUE, only online objects are returned.
+	 * @param boolean $online_only If true, only online objects are returned.
 	 * @return Staff[] Array with Staff objects.
 	 */
-	public static function getAll($clang_id, $online_only = TRUE) {
+	public static function getAll($clang_id, $online_only = true) {
 		$query = 'SELECT lang.staff_id FROM '. rex::getTablePrefix() .'d2u_staff_lang AS lang '
 			.'LEFT JOIN '. rex::getTablePrefix() .'d2u_staff AS staff '
 				.'ON lang.staff_id = staff.staff_id '
@@ -200,10 +200,10 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 	/**
 	 * Gets all staffs with citation.
 	 * @param int $clang_id Redaxo language ID
-	 * @param boolean $online_only If TRUE, only online objects are returned.
+	 * @param boolean $online_only If true, only online objects are returned.
 	 * @return Staff[] Array with Staff objects.
 	 */
-	public static function getAllWithCitation($clang_id, $online_only = TRUE) {
+	public static function getAllWithCitation($clang_id, $online_only = true) {
 		$query = 'SELECT lang.staff_id FROM '. rex::getTablePrefix() .'d2u_staff_lang AS lang '
 			.'LEFT JOIN '. rex::getTablePrefix() .'d2u_staff AS staff '
 				.'ON lang.staff_id = staff.staff_id '
@@ -238,7 +238,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 					.'ON lang.staff_id = main.staff_id '
 				."WHERE clang_id = ". $clang_id ." AND translation_needs_update = 'yes' "
 				.'ORDER BY name';
-		if($type == 'missing') {
+		if($type === 'missing') {
 			$query = 'SELECT main.staff_id FROM '. \rex::getTablePrefix() .'d2u_staff AS main '
 					.'LEFT JOIN '. \rex::getTablePrefix() .'d2u_staff_lang AS target_lang '
 						.'ON main.staff_id = target_lang.staff_id AND target_lang.clang_id = '. $clang_id .' '
@@ -262,7 +262,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 	
 	/**
 	 * Updates or inserts the object into database.
-	 * @return boolean TRUE if successful
+	 * @return boolean true if successful
 	 */
 	public function save() {
 		$error = 0;
@@ -271,11 +271,11 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 		$pre_save_staff = new Staff($this->staff_id, $this->clang_id);
 	
 		// save priority, but only if new or changed
-		if($this->priority != $pre_save_staff->priority || $this->staff_id == 0) {
+		if($this->priority != $pre_save_staff->priority || $this->staff_id === 0) {
 			$this->setPriority();
 		}
 
-		if($this->staff_id == 0 || $pre_save_staff != $this) {
+		if($this->staff_id === 0 || $pre_save_staff != $this) {
 			$query = rex::getTablePrefix() ."d2u_staff SET "
 					."article_id = ". ($this->article_id ?: 0) .", "
 					."online_status = '". $this->online_status ."', "
@@ -285,7 +285,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 					."gender = '". addslashes($this->gender) ."', "
 					."company_id = ". $this->company_id;
 
-			if($this->staff_id == 0) {
+			if($this->staff_id === 0) {
 				$query = "INSERT INTO ". $query;
 			}
 			else {
@@ -294,8 +294,8 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 
 			$result = rex_sql::factory();
 			$result->setQuery($query);
-			if($this->staff_id == 0) {
-				$this->staff_id = $result->getLastId();
+			if($this->staff_id === 0) {
+				$this->staff_id = intval($result->getLastId());
 				$error = $result->hasError();
 			}
 		}
@@ -327,7 +327,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 	 * Reassigns priorities in database.
 	 * @param boolean $delete Reorder priority after deletion
 	 */
-	private function setPriority($delete = FALSE) {
+	private function setPriority($delete = false):void {
 		// Pull prios from database
 		$query = "SELECT staff_id, priority FROM ". rex::getTablePrefix() ."d2u_staff "
 			."WHERE staff_id <> ". $this->staff_id ." ORDER BY priority";
@@ -341,7 +341,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 		
 		// When prio is too high or was deleted, simply add at end 
 		if($this->priority > $result->getRows() || $delete) {
-			$this->priority = $result->getRows() + 1;
+			$this->priority = intval($result->getRows()) + 1;
 		}
 
 		$staffs = [];
@@ -354,7 +354,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 		// Save all prios
 		foreach($staffs as $prio => $staff_id) {
 			$query = "UPDATE ". rex::getTablePrefix() ."d2u_staff "
-					."SET priority = ". ($prio + 1) ." " // +1 because array_splice recounts at zero
+					."SET priority = ". (intval($prio) + 1) ." " // +1 because array_splice recounts at zero
 					."WHERE staff_id = ". $staff_id;
 			$result = rex_sql::factory();
 			$result->setQuery($query);

@@ -23,9 +23,9 @@ function rex_d2u_staff_clang_deleted(rex_extension_point $ep) {
 	$clang_id = $params['id'];
 
 	// Delete
-	$staff = Staff::getAll($clang_id, FALSE);
+	$staff = Staff::getAll($clang_id, false);
 	foreach ($staff as $cur_staff) {
-		$cur_staff->delete(FALSE);
+		$cur_staff->delete(false);
 	}
 	
 	return $warning;

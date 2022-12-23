@@ -10,10 +10,10 @@ if($message != "") {
 
 // save settings
 if (intval(filter_input(INPUT_POST, "btn_save")) === 1 || intval(filter_input(INPUT_POST, "btn_apply")) === 1) {
-	$form = (array) rex_post('form', 'array', []);
+	$form = rex_post('form', 'array', []);
 
 	// Media fields and links need special treatment
-	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
+	$input_media = rex_post('REX_INPUT_MEDIA', 'array', []);
 
 	$company = new D2U_Staff\Company($form['company_id']);
 	$company->name = $form['name'];
@@ -27,19 +27,19 @@ if (intval(filter_input(INPUT_POST, "btn_save")) === 1 || intval(filter_input(IN
 	}
 	
 	// Redirect to make reload and thus double save impossible
-	if(filter_input(INPUT_POST, "btn_apply") == 1 && $company !== FALSE) {
-		header("Location: ". rex_url::currentBackendPage(array("entry_id"=>$company->company_id, "func"=>'edit', "message"=>$message), FALSE));
+	if(intval(filter_input(INPUT_POST, "btn_apply", FILTER_VALIDATE_INT)) === 1 &&$company !== false) {
+		header("Location: ". rex_url::currentBackendPage(array("entry_id"=>$company->company_id, "func"=>'edit', "message"=>$message), false));
 	}
 	else {
-		header("Location: ". rex_url::currentBackendPage(array("message"=>$message), FALSE));
+		header("Location: ". rex_url::currentBackendPage(array("message"=>$message), false));
 	}
 	exit;
 }
 // Delete
-else if(filter_input(INPUT_POST, "btn_delete") == 1 || $func == 'delete') {
+else if(intval(filter_input(INPUT_POST, "btn_delete", FILTER_VALIDATE_INT)) === 1 || $func === 'delete') {
 	$company_id = $entry_id;
-	if($company_id == 0) {
-		$form = (array) rex_post('form', 'array', []);
+	if($company_id === 0) {
+		$form = rex_post('form', 'array', []);
 		$company_id = $form['company_id'];
 	}
 	$company = new D2U_Staff\Company($company_id);
@@ -65,25 +65,25 @@ else if(filter_input(INPUT_POST, "btn_delete") == 1 || $func == 'delete') {
 }
 
 // Eingabeformular
-if ($func == 'edit' || $func == 'clone' || $func == 'add') {
+if ($func === 'edit' || $func === 'clone' || $func === 'add') {
 ?>
 	<form action="<?php print rex_url::currentBackendPage(); ?>" method="post">
 		<div class="panel panel-edit">
 			<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_staff_company'); ?></div></header>
 			<div class="panel-body">
-				<input type="hidden" name="form[company_id]" value="<?php echo ($func == 'edit' ? $entry_id : 0); ?>">
+				<input type="hidden" name="form[company_id]" value="<?php echo ($func === 'edit' ? $entry_id : 0); ?>">
 				<fieldset>
 					<legend><?php echo rex_i18n::msg('d2u_staff_company'); ?></legend>
 					<div class="panel-body-wrapper slide">
 						<?php
 							$company = new D2U_Staff\Company($entry_id);
-							$readonly = TRUE;
+							$readonly = true;
 							if(\rex::getUser() instanceof rex_user && (\rex::getUser()->isAdmin() || \rex::getUser()->hasPerm('d2u_immo[edit_data]'))) {
-								$readonly = FALSE;
+								$readonly = false;
 							}
 							
-							d2u_addon_backend_helper::form_input('d2u_helper_name', 'form[name]', $company->name, TRUE, $readonly);
-							d2u_addon_backend_helper::form_input('d2u_staff_url', 'form[url]', $company->url, FALSE, $readonly);
+							d2u_addon_backend_helper::form_input('d2u_helper_name', 'form[name]', $company->name, true, $readonly);
+							d2u_addon_backend_helper::form_input('d2u_staff_url', 'form[url]', $company->url, false, $readonly);
 							d2u_addon_backend_helper::form_mediafield('d2u_staff_logo', '1', $company->logo, $readonly);
 						?>
 					</div>
@@ -119,7 +119,7 @@ if ($func == 'edit' || $func == 'clone' || $func == 'add') {
 //		print d2u_addon_backend_helper::getJS();
 }
 
-if ($func == '') {
+if ($func === '') {
 	$query = 'SELECT company_id, name, url '
 		. 'FROM '. \rex::getTablePrefix() .'d2u_staff_company '
 		. 'ORDER BY name ASC';

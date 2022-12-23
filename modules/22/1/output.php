@@ -13,7 +13,7 @@
 	
 	$type = "REX_VALUE[1]";
 
-	$stafflist = Staff::getAll(rex_clang::getCurrentId(), TRUE);
+	$stafflist = Staff::getAll(rex_clang::getCurrentId(), true);
 	
 	// Output
 	foreach ($stafflist as $staff) {
