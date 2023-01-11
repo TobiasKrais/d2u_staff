@@ -28,6 +28,7 @@ $d2u_module_manager->showManagerList();
 <p>1.1.2-DEV:</p>
 <ul>
 	<li>.github Verzeichnis aus Installer Action ausgeschlossen.</li>
+	<li>rexstan Anpassungen</li>
 </ul>
 <p>1.1.1:</p>
 <ul>

@@ -271,7 +271,7 @@ class Staff implements \D2U_Helper\ITranslationHelper {
 		$pre_save_staff = new Staff($this->staff_id, $this->clang_id);
 	
 		// save priority, but only if new or changed
-		if($this->priority != $pre_save_staff->priority || $this->staff_id === 0) {
+		if($this->priority !== $pre_save_staff->priority || $this->staff_id === 0) {
 			$this->setPriority();
 		}
 

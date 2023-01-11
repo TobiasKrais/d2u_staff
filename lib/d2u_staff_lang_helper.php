@@ -4,37 +4,37 @@
  */
 class d2u_staff_lang_helper extends \D2U_Helper\ALangHelper {
 	/**
-	 * @var string[] Array with english replacements. Key is the wildcard,
+	 * @var array<string, string> Array with english replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_english = [
+	protected array $replacements_english = [
 		'd2u_staff_by' => 'By',
 		'd2u_staff_published' => 'published on',
 	];
 	
 	/**
-	 * @var string[] Array with german replacements. Key is the wildcard,
+	 * @var array<string, string> Array with german replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_german = [
+	protected array $replacements_german = [
 		'd2u_staff_by' => 'Von',
 		'd2u_staff_published' => 'veröffentlicht am',
 	];
 	
 	/**
-	 * @var string[] Array with french replacements. Key is the wildcard,
+	 * @var array<string, string> Array with french replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_french = [
+	protected array $replacements_french = [
 		'd2u_staff_by' => 'De',
 		'd2u_staff_published' => 'publié le',
 	];
 	
 	/**
-	 * @var string[] Array with spanish replacements. Key is the wildcard,
+	 * @var array<string, string> Array with spanish replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_spanish = [
+	protected array $replacements_spanish = [
 		'd2u_staff_by' => 'De',
 		'd2u_staff_published' => 'publicatdo en',
 	];
