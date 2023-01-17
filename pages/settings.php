@@ -1,7 +1,7 @@
 <?php
 // save settings
-if (filter_input(INPUT_POST, "btn_save") == 'save') {
-	$settings = (array) rex_post('settings', 'array', []);
+if (filter_input(INPUT_POST, 'btn_save') === 'save') {
+	$settings = rex_post('settings', 'array', []);
 
 	// Checkbox also needs special treatment if empty
 	$settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? "true" : "false";

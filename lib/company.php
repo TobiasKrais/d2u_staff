@@ -48,7 +48,7 @@ class Company {
 	/**
 	 * Deletes the object.
 	 */
-	public function delete() {
+	public function delete():void {
 		$query = "DELETE FROM ". \rex::getTablePrefix() ."d2u_staff_company "
 			."WHERE company_id = ". $this->company_id;
 		$result = \rex_sql::factory();
