@@ -47,7 +47,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_delete', FILTER_VALIDATE_INT) || '
     $company_staff = $company->getStaff();
 
     // If not used, delete
-    if (0 == count($company_staff)) {
+    if (0 === count($company_staff)) {
         $company->delete();
     } else {
         $message = '<ul>';
