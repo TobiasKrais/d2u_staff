@@ -98,7 +98,7 @@ class Company
      */
     public function save()
     {
-        $error = 0;
+        $error = false;
 
         $query = rex::getTablePrefix() .'d2u_staff_company SET '
                 ."name = '". $this->name ."', "

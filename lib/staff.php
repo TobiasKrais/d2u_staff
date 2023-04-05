@@ -242,7 +242,7 @@ class Staff implements \D2U_Helper\ITranslationHelper
      */
     public function save()
     {
-        $error = 0;
+        $error = false;
 
         // Save the not language specific part
         $pre_save_staff = new self($this->staff_id, $this->clang_id);
@@ -276,7 +276,7 @@ class Staff implements \D2U_Helper\ITranslationHelper
             }
         }
 
-        if (0 == $error) {
+        if (!$error) {
             // Save the language specific part
             $pre_save_staff = new self($this->staff_id, $this->clang_id);
             if ($pre_save_staff != $this) {
