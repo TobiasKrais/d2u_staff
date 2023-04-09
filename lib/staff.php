@@ -10,7 +10,7 @@ class Staff implements \D2U_Helper\ITranslationHelper
     /** @var int Redaxo Language ID */
     public int $clang_id = 0;
 
-    /** @var int Address ID */
+    /** @var int Company ID */
     public int $company_id = 0;
 
     /** @var int Redaxo article ID with detailed information */
@@ -257,7 +257,7 @@ class Staff implements \D2U_Helper\ITranslationHelper
                     .'article_id = '. ($this->article_id ?: 0) .', '
                     ."online_status = '". $this->online_status ."', "
                     ."picture = '". $this->picture ."', "
-                    ."priority = '". $this->priority ."', "
+                    ."priority = ". $this->priority .", "
                     ."name = '". addslashes($this->name) ."', "
                     ."gender = '". addslashes($this->gender) ."', "
                     .'company_id = '. $this->company_id;
