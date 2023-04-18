@@ -13,7 +13,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_save') || 1 === (int) filter_input
     $form = rex_post('form', 'array', []);
 
     // Media fields and links need special treatment
-    $input_link = (array) rex_post('REX_INPUT_LINK', 'array', []);
+    $input_link = rex_post('REX_INPUT_LINK', 'array', []);
     $input_media = rex_post('REX_INPUT_MEDIA', 'array', []);
 
     $success = true;
