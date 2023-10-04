@@ -69,15 +69,15 @@
 		},
 		"author": {
 			"@type": "Person",
-			"name": "<?= addslashes(html_entity_decode(strip_tags('' != $author->lang_name ? $author->lang_name : $author->name))) ?>",
-			"description": "<?= addslashes(html_entity_decode(strip_tags($author->citation))) ?>",
+			"name": <?= json_encode(html_entity_decode(strip_tags('' != $author->lang_name ? $author->lang_name : $author->name)), JSON_UNESCAPED_UNICODE) ?>,
+			"description": <?= json_encode(html_entity_decode(strip_tags($author->citation)), JSON_UNESCAPED_UNICODE) ?>,
 		    "gender": "<?= $author->gender ?>",
-			"knowsAbout": "<?= addslashes(html_entity_decode(strip_tags($author->knows_about))) ?>",
+			"knowsAbout": <?= json_encode(html_entity_decode(strip_tags($author->knows_about)), JSON_UNESCAPED_UNICODE) ?>,
 			"url": "<?= $author->article_id > 0 ? rex_getUrl($author->article_id) : $current_domain_with_scheme ?>",
 			"image": {
 				"@type":"ImageObject",
 				"url":"<?= $current_domain_with_scheme . rex_url::media($author->picture) ?>",
-				"caption":"<?= addslashes(html_entity_decode(strip_tags('' != $author->lang_name ? $author->lang_name : $author->name))) ?>"
+				"caption": <?= json_encode(html_entity_decode(strip_tags('' != $author->lang_name ? $author->lang_name : $author->name)), JSON_UNESCAPED_UNICODE) ?>
 			}
 		},
 		<?php
@@ -86,7 +86,7 @@
             if ($company->company_id) {
         ?>"publisher": {
 			"@type": "Organization",
-			"name": "<?= addslashes(html_entity_decode($company->name)) ?>",
+			"name": <?= json_encode(html_entity_decode($company->name), JSON_UNESCAPED_UNICODE) ?>,
 			"url": "<?= $company->url ?>",
 			"logo": {
 				"@type": "ImageObject",
@@ -96,8 +96,8 @@
 		<?php
             }
         }
-        ?>"headline": "<?= addslashes(strip_tags($article->getName())) ?>",
-		"description": "<?= addslashes(strip_tags($article->getValue('yrewrite_description'))) ?>",
+        ?>"headline": <?= json_encode(strip_tags($article->getName()), JSON_UNESCAPED_UNICODE) ?>,
+		"description": <?= json_encode(strip_tags($article->getValue('yrewrite_description')), JSON_UNESCAPED_UNICODE) ?>,
 		"image": "<?= $article->getValue('yrewrite_image') ? $current_domain_with_scheme . rex_url::media($article->getValue('yrewrite_image')) : '' ?>",
 		"datePublished": "<?= date('c', $article->getCreateDate()) ?>",
 		"dateModified" : "<?= date('c', $article->getUpdateDate()) ?>"

@@ -18,7 +18,7 @@ class D2UStaffModules
             3);
         $modules[] = new D2UModule('22-2',
             'D2U Mitarbeiter - Autorenbox Detailinfo',
-            1);
+            2);
         $modules[] = new D2UModule('22-3',
             'D2U Mitarbeiter - Autorenbox Kurzinfo',
             1);
