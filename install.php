@@ -49,7 +49,7 @@ if (class_exists('D2UModuleManager')) {
         2);
     $modules[] = new D2UModule('22-3',
         'D2U Mitarbeiter - Autorenbox Kurzinfo',
-        1);
+        2);
     $d2u_module_manager = new D2UModuleManager($modules, '', 'd2u_staff');
     $d2u_module_manager->autoupdate();
 }

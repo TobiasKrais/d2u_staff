@@ -28,6 +28,7 @@ $d2u_module_manager->showManagerList();
 <p>1.1.3-DEV:</p>
 <ul>
 	<li>Modul 22-2 "D2U Mitarbeiter - Autorenbox Detailinfo": LD+JSON Ausgabe Fehlerbehebung bei Verwendung eines '.</li>
+	<li>Modul 22-3 "D2U Mitarbeiter - Autorenbox Kurzinfo". Text auf 'Letztes Update am' ... 'von' geändert, damit deutlicher wird, dass das Datum ein Updatedatum ist.</li>
 </ul>
 <p>1.1.2:</p>
 <ul>

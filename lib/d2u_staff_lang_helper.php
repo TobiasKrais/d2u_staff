@@ -9,8 +9,8 @@ class d2u_staff_lang_helper extends \D2U_Helper\ALangHelper
      * value the replacement.
      */
     public $replacements_english = [
-        'd2u_staff_by' => 'By',
-        'd2u_staff_published' => 'published on',
+        'd2u_staff_by' => 'by',
+        'd2u_staff_published' => 'Last updated on',
     ];
 
     /**
@@ -18,8 +18,8 @@ class d2u_staff_lang_helper extends \D2U_Helper\ALangHelper
      * value the replacement.
      */
     protected array $replacements_german = [
-        'd2u_staff_by' => 'Von',
-        'd2u_staff_published' => 'veröffentlicht am',
+        'd2u_staff_by' => 'von',
+        'd2u_staff_published' => 'Letztes Update am',
     ];
 
     /**
@@ -27,8 +27,8 @@ class d2u_staff_lang_helper extends \D2U_Helper\ALangHelper
      * value the replacement.
      */
     protected array $replacements_french = [
-        'd2u_staff_by' => 'De',
-        'd2u_staff_published' => 'publié le',
+        'd2u_staff_by' => 'par',
+        'd2u_staff_published' => 'Dernière mise à jour le',
     ];
 
     /**
@@ -36,8 +36,8 @@ class d2u_staff_lang_helper extends \D2U_Helper\ALangHelper
      * value the replacement.
      */
     protected array $replacements_spanish = [
-        'd2u_staff_by' => 'De',
-        'd2u_staff_published' => 'publicatdo en',
+        'd2u_staff_by' => 'por',
+        'd2u_staff_published' => 'Última actualización el',
     ];
 
     /**

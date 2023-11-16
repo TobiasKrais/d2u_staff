@@ -21,7 +21,7 @@ class D2UStaffModules
             2);
         $modules[] = new D2UModule('22-3',
             'D2U Mitarbeiter - Autorenbox Kurzinfo',
-            1);
+            2);
         return $modules;
     }
 }

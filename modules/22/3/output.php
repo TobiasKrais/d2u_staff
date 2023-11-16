@@ -27,8 +27,8 @@ if ($author->article_id > 0) {
 echo '</div>';
 echo '<div class="col-9 col-md-10">';
 echo '<div class="author-head">';
-echo \Sprog\Wildcard::get('d2u_staff_by') .' <strong>'. $link_start . $author->name . $link_end .'</strong> '
-    . \Sprog\Wildcard::get('d2u_staff_published') .' <strong>'. date('d.m.Y', rex_article::getCurrent()->getUpdateDate()) .'</strong>';
+echo \Sprog\Wildcard::get('d2u_staff_published') .' <strong>'. date('d.m.Y', rex_article::getCurrent()->getUpdateDate()) .'</strong>, '
+    . \Sprog\Wildcard::get('d2u_staff_by') .' <strong>'. $link_start . $author->name . $link_end .'</strong>';
 echo '</div>';
 echo '</div>';
 echo '</div>';
