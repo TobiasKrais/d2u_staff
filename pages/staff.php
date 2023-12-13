@@ -24,7 +24,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_save') || 1 === (int) filter_input
             $staff = new Staff($staff_id, $rex_clang->getId());
             $staff->staff_id = $staff_id; // Ensure correct ID in case first language has no object
             $staff->company_id = $form['company_id'];
-            $staff->article_id = $input_link['article_id'];
+            $staff->article_id = (int) $input_link['article_id'];
             $staff->gender = $form['gender'];
             $staff->name = $form['name'];
             $staff->online_status = array_key_exists('online_status', $form) ? 'online' : 'offline';
