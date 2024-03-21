@@ -39,24 +39,13 @@
     ->ensure();
 
 // Update modules
-if (class_exists('D2UModuleManager')) {
-    $modules = [];
-    $modules[] = new D2UModule('22-1',
-        'D2U Mitarbeiter - Liste',
-        3);
-    $modules[] = new D2UModule('22-2',
-        'D2U Mitarbeiter - Autorenbox Detailinfo',
-        2);
-    $modules[] = new D2UModule('22-3',
-        'D2U Mitarbeiter - Autorenbox Kurzinfo',
-        2);
-    $d2u_module_manager = new D2UModuleManager($modules, '', 'd2u_staff');
-    $d2u_module_manager->autoupdate();
-}
+include __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'Module.php';
+$d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UStaff\Module::getModules(), '', 'd2u_staff');
+$d2u_module_manager->autoupdate();
 
 // Update language replacements
-if (!class_exists('d2u_staff_lang_helper')) {
+if (!class_exists(TobiasKrais\D2UStaff\LangHelper::class)) {
     // Load class in case addon is deactivated
-    require_once 'lib/d2u_staff_lang_helper.php';
+    require_once 'lib/LangHelper.php';
 }
-d2u_staff_lang_helper::factory()->install();
+TobiasKrais\D2UStaff\LangHelper::factory()->install();

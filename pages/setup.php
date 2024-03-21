@@ -2,9 +2,9 @@
 /*
  * Modules
  */
-$d2u_module_manager = new D2UModuleManager(D2UStaffModules::getModules(), 'modules/', 'd2u_staff');
+$d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(TobiasKrais\D2UStaff\Module::getModules(), 'modules/', 'd2u_staff');
 
-// D2UModuleManager actions
+// \TobiasKrais\D2UHelper\ModuleManager actions
 $d2u_module_id = rex_request('d2u_module_id', 'string');
 $paired_module = (int) rex_request('pair_'. $d2u_module_id, 'int');
 $function = rex_request('function', 'string');
@@ -12,7 +12,7 @@ if ('' !== $d2u_module_id) {
     $d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
 }
 
-// D2UModuleManager show list
+// \TobiasKrais\D2UHelper\ModuleManager show list
 $d2u_module_manager->showManagerList();
 
 ?>
@@ -25,8 +25,20 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.1.3-DEV:</p>
+<p>1.2.0-DEV:</p>
 <ul>
+	<li>Vorbereitung auf R6: Folgende Klassen wurden umbenannt.
+		<ul>
+			<li><code>D2U_Staff\Company</code> wird zu <code>TobiasKrais\D2UStaff\Company</code>.</li>
+			<li><code>Staff</code> wird zu <code>TobiasKrais\D2UStaff\Staff</code>.</li>
+		</ul>
+		Folgende interne Klassen wurden wurden ebenfalls umbenannt:
+		<ul>
+			<li><code>d2u_staff_lang_helper</code> wird zu <code>TobiasKrais\D2UStaff\LangHelper</code>.</li>
+			<li><code>D2UStaffModules</code> wird zu <code>TobiasKrais\D2UStaff\Module</code>.</li>
+		</ul>
+	</li>
+	<li>Modul 22-1 "D2U Mitarbeiter - Liste": auf großen Bildschirmen wird die Liste in 2 Spalten angezeigt.</li>
 	<li>Modul 22-2 "D2U Mitarbeiter - Autorenbox Detailinfo": LD+JSON Ausgabe Fehlerbehebung bei Verwendung eines '.</li>
 	<li>Modul 22-3 "D2U Mitarbeiter - Autorenbox Kurzinfo". Text auf 'Letztes Update am' ... 'von' geändert, damit deutlicher wird, dass das Datum ein Updatedatum ist.</li>
 	<li>Bugfix: wenn ein Artikellink entfernt wurde, gab es beim Speichern einen Fehler.</li>

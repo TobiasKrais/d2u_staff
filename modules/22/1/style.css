@@ -1,0 +1,16 @@
+.module-box-wrapper {
+	margin-bottom: 15px;
+}
+.module-box {
+	border: 1px solid article_color_h;
+	padding: 15px;
+}
+.module-box .author-head {
+	padding-bottom: 15px;
+}
+.module-box .author-image {
+	text-align: center;
+}
+.module-box img {
+	border-radius: 100px;
+}

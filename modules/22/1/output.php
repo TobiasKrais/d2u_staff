@@ -7,38 +7,37 @@ $position_container_classes = 'col-12 col-lg-'. $cols . $offset_lg;
 
 $type = 'REX_VALUE[1]';
 
-$stafflist = Staff::getAll(rex_clang::getCurrentId(), true);
+$stafflist = TobiasKrais\D2UStaff\Staff::getAll(rex_clang::getCurrentId(), true);
 
 // Output
+echo '<div class="'. $position_container_classes .'">';
+echo '<div class="row">';
 foreach ($stafflist as $staff) {
-    echo '<div class="'. $position_container_classes .'">';
+    echo '<div class="col-12 col-md-6 module-box-wrapper">';
     echo '<div class="module-box">';
     echo '<div class="row">';
     echo '<div class="col-12 col-sm-6 col-md-4">';
     if ($staff->article_id > 0) {
         echo '<a href="'. rex_getUrl($staff->article_id) .'">';
     }
-    echo '<img src="';
-    if ('' == $staff->picture) {
-        echo rex_addon::get('d2u_staff')->getAssetsUrl('noavatar.jpg');
-    } else {
-        echo 'index.php?rex_media_type='. $type .'&rex_media_file='. $staff->picture;
-    }
-    echo '" alt="'. $staff->name .'">';
+    echo '<img src="'. ('' == $staff->picture ? rex_addon::get('d2u_staff')->getAssetsUrl('noavatar.jpg') : rex_media_manager::getUrl($type, $staff->picture)) .'" alt="'. $staff->name .'">';
     if ($staff->article_id > 0) {
         echo '</a>';
     }
-    echo '<br><br></div>';
+    echo '</div>';
+    
     echo '<div class="col-12 col-sm-6 col-md-8">';
     echo '<strong>'. $staff->name.'</strong> '. $staff->position .'<br><br>';
     if ('' != $staff->area_of_responsibility) {
         echo $staff->area_of_responsibility .'<br>';
     }
     if ('' != $staff->citation) {
-        echo d2u_addon_frontend_helper::prepareEditorField($staff->citation);
+        echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($staff->citation);
     }
     echo '</div>';
     echo '</div>';
     echo '</div>';
     echo '</div>';
 }
+echo '</div>';
+echo '</div>';

@@ -1,6 +1,6 @@
 <?php
 
-namespace D2U_Staff;
+namespace TobiasKrais\D2UStaff;
 
 use rex;
 use rex_clang;
@@ -120,4 +120,10 @@ class Company
 
         return $error;
     }
+}
+
+namespace D2U_Staff;
+
+/** @deprecated Since version 1.2.0, to be removed in 2.0.0. Use \TobiasKrais\D2UStaff\Company instead. */
+class Company extends \TobiasKrais\D2UStaff\Company {
 }

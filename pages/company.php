@@ -15,7 +15,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_save') || 1 === (int) filter_input
     // Media fields and links need special treatment
     $input_media = rex_post('REX_INPUT_MEDIA', 'array', []);
 
-    $company = new D2U_Staff\Company($form['company_id']);
+    $company = new TobiasKrais\D2UStaff\Company($form['company_id']);
     $company->name = $form['name'];
     $company->url = $form['url'];
     $company->logo = $input_media[1];
@@ -41,7 +41,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_delete', FILTER_VALIDATE_INT) || '
         $form = rex_post('form', 'array', []);
         $company_id = $form['company_id'];
     }
-    $company = new D2U_Staff\Company($company_id);
+    $company = new TobiasKrais\D2UStaff\Company($company_id);
 
     // Check if object is used
     $company_staff = $company->getStaff();
@@ -74,15 +74,15 @@ if ('edit' === $func || 'clone' === $func || 'add' === $func) {
 					<legend><?= rex_i18n::msg('d2u_staff_company') ?></legend>
 					<div class="panel-body-wrapper slide">
 						<?php
-                            $company = new D2U_Staff\Company($entry_id);
+                            $company = new TobiasKrais\D2UStaff\Company($entry_id);
                             $readonly = true;
                             if (\rex::getUser() instanceof rex_user && (\rex::getUser()->isAdmin() || \rex::getUser()->hasPerm('d2u_immo[edit_data]'))) {
                                 $readonly = false;
                             }
 
-                            d2u_addon_backend_helper::form_input('d2u_helper_name', 'form[name]', $company->name, true, $readonly);
-                            d2u_addon_backend_helper::form_input('d2u_staff_url', 'form[url]', $company->url, false, $readonly);
-                            d2u_addon_backend_helper::form_mediafield('d2u_staff_logo', '1', $company->logo, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_name', 'form[name]', $company->name, true, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_url', 'form[url]', $company->url, false, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_staff_logo', '1', $company->logo, $readonly);
                         ?>
 					</div>
 				</fieldset>
@@ -113,8 +113,8 @@ if ('edit' === $func || 'clone' === $func || 'add' === $func) {
 		});
 	</script>
 	<?php
-        echo d2u_addon_backend_helper::getCSS();
-//		print d2u_addon_backend_helper::getJS();
+        echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
+//		print \TobiasKrais\D2UHelper\BackendHelper::getJS();
 }
 
 if ('' === $func) {

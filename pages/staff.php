@@ -21,7 +21,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_save') || 1 === (int) filter_input
     $staff_id = $form['staff_id'];
     foreach (rex_clang::getAll() as $rex_clang) {
         if (false === $staff) {
-            $staff = new Staff($staff_id, $rex_clang->getId());
+            $staff = new TobiasKrais\D2UStaff\Staff($staff_id, $rex_clang->getId());
             $staff->staff_id = $staff_id; // Ensure correct ID in case first language has no object
             $staff->company_id = $form['company_id'];
             $staff->article_id = (int) $input_link['article_id'];
@@ -71,7 +71,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_delete', FILTER_VALIDATE_INT) || '
         $form = rex_post('form', 'array', []);
         $staff_id = $form['staff_id'];
     }
-    $staff = new Staff($staff_id, (int) rex_config::get('d2u_helper', 'default_lang'));
+    $staff = new TobiasKrais\D2UStaff\Staff($staff_id, (int) rex_config::get('d2u_helper', 'default_lang'));
     $staff->staff_id = $staff_id; // Ensure correct ID in case language has no object
     $staff->delete();
 
@@ -80,7 +80,7 @@ if (1 === (int) filter_input(INPUT_POST, 'btn_delete', FILTER_VALIDATE_INT) || '
 // Change online status of staff
 elseif ('changestatus' === $func) {
     $staff_id = $entry_id;
-    $staff = new Staff($staff_id, (int) rex_config::get('d2u_helper', 'default_lang'));
+    $staff = new TobiasKrais\D2UStaff\Staff($staff_id, (int) rex_config::get('d2u_helper', 'default_lang'));
     $staff->staff_id = $staff_id; // Ensure correct ID in case language has no object
     $staff->changeStatus();
 
@@ -100,34 +100,34 @@ if ('edit' === $func || 'add' === $func) {
 					<legend><?= rex_i18n::msg('d2u_helper_data_all_lang') ?></legend>
 					<div class="panel-body-wrapper slide">
 						<?php
-                            $staff = new Staff($entry_id, (int) rex_config::get('d2u_helper', 'default_lang'));
+                            $staff = new TobiasKrais\D2UStaff\Staff($entry_id, (int) rex_config::get('d2u_helper', 'default_lang'));
                             $readonly = true;
                             if (rex::getUser() instanceof rex_user && (rex::getUser()->isAdmin() || rex::getUser()->hasPerm('d2u_staff[edit_data]'))) {
                                 $readonly = false;
                             }
 
-                            d2u_addon_backend_helper::form_input('d2u_helper_name', 'form[name]', $staff->name, true, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_name', 'form[name]', $staff->name, true, $readonly);
                             $options_gender = [
                                 'male' => rex_i18n::msg('d2u_staff_gender_male'),
                                 'female' => rex_i18n::msg('d2u_staff_gender_female'),
                                 'divers' => rex_i18n::msg('d2u_staff_gender_divers'),
                             ];
-                            d2u_addon_backend_helper::form_select('d2u_staff_gender', 'form[gender]', $options_gender, [$staff->gender], 1, false, $readonly);
-                            d2u_addon_backend_helper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
-                            d2u_addon_backend_helper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', 'online' === $staff->online_status, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_staff_gender', 'form[gender]', $options_gender, [$staff->gender], 1, false, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', 'online' === $staff->online_status, $readonly);
                             $options = [0 => rex_i18n::msg('d2u_staff_no_link')];
-                            foreach (\D2U_Staff\Company::getAll() as $company) {
+                            foreach (\TobiasKrais\D2UStaff\Company::getAll() as $company) {
                                 $options[$company->company_id] = $company->name;
                             }
-                            d2u_addon_backend_helper::form_select('d2u_staff_company', 'form[company_id]', $options, [$staff->company_id], 1, false, $readonly);
-                            d2u_addon_backend_helper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, (int) rex_config::get('d2u_helper', 'default_lang'), $readonly);
-                            d2u_addon_backend_helper::form_input('header_priority', 'form[priority]', $staff->priority, true, $readonly, 'number');
+                            \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_staff_company', 'form[company_id]', $options, [$staff->company_id], 1, false, $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, (int) rex_config::get('d2u_helper', 'default_lang'), $readonly);
+                            \TobiasKrais\D2UHelper\BackendHelper::form_input('header_priority', 'form[priority]', $staff->priority, true, $readonly, 'number');
                         ?>
 					</div>
 				</fieldset>
 				<?php
                     foreach (rex_clang::getAll() as $rex_clang) {
-                        $staff = new Staff($entry_id, $rex_clang->getId());
+                        $staff = new TobiasKrais\D2UStaff\Staff($entry_id, $rex_clang->getId());
                         $required = $rex_clang->getId() === (int) (rex_config::get('d2u_helper', 'default_lang')) ? true : false;
 
                         $readonly_lang = true;
@@ -144,7 +144,7 @@ if ('edit' === $func || 'add' === $func) {
                                     $options_translations['yes'] = rex_i18n::msg('d2u_helper_translation_needs_update');
                                     $options_translations['no'] = rex_i18n::msg('d2u_helper_translation_is_uptodate');
                                     $options_translations['delete'] = rex_i18n::msg('d2u_helper_translation_delete');
-                                    d2u_addon_backend_helper::form_select('d2u_helper_translation', 'form[lang]['. $rex_clang->getId() .'][translation_needs_update]', $options_translations, [$staff->translation_needs_update], 1, false, $readonly_lang);
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_translation', 'form[lang]['. $rex_clang->getId() .'][translation_needs_update]', $options_translations, [$staff->translation_needs_update], 1, false, $readonly_lang);
                                 } else {
                                     echo '<input type="hidden" name="form[lang]['. $rex_clang->getId() .'][translation_needs_update]" value="">';
                                 }
@@ -162,11 +162,11 @@ if ('edit' === $func || 'add' === $func) {
 							</script>
 							<div id="details_clang_<?= $rex_clang->getId() ?>">
 								<?php
-                                    d2u_addon_backend_helper::form_input('d2u_staff_lang_name', 'form[lang]['. $rex_clang->getId() .'][lang_name]', $staff->lang_name, false, $readonly_lang);
-                                    d2u_addon_backend_helper::form_input('d2u_staff_area_of_responsibility', 'form[lang]['. $rex_clang->getId() .'][area_of_responsibility]', $staff->area_of_responsibility, false, $readonly_lang);
-                                    d2u_addon_backend_helper::form_input('d2u_staff_position', 'form[lang]['. $rex_clang->getId() .'][position]', $staff->position, false, $readonly_lang);
-                                    d2u_addon_backend_helper::form_textarea('d2u_staff_citation', 'form[lang]['. $rex_clang->getId() .'][citation]', $staff->citation, 5, false, $readonly_lang, true);
-                                    d2u_addon_backend_helper::form_input('d2u_staff_knows_about', 'form[lang]['. $rex_clang->getId() .'][knows_about]', $staff->knows_about, false, $readonly_lang);
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_lang_name', 'form[lang]['. $rex_clang->getId() .'][lang_name]', $staff->lang_name, false, $readonly_lang);
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_area_of_responsibility', 'form[lang]['. $rex_clang->getId() .'][area_of_responsibility]', $staff->area_of_responsibility, false, $readonly_lang);
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_position', 'form[lang]['. $rex_clang->getId() .'][position]', $staff->position, false, $readonly_lang);
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_textarea('d2u_staff_citation', 'form[lang]['. $rex_clang->getId() .'][citation]', $staff->citation, 5, false, $readonly_lang, true);
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_knows_about', 'form[lang]['. $rex_clang->getId() .'][knows_about]', $staff->knows_about, false, $readonly_lang);
                                 ?>
 							</div>
 						</div>
@@ -193,8 +193,8 @@ if ('edit' === $func || 'add' === $func) {
 	</form>
 	<br>
 	<?php
-        echo d2u_addon_backend_helper::getCSS();
-        echo d2u_addon_backend_helper::getJS();
+        echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
+        echo \TobiasKrais\D2UHelper\BackendHelper::getJS();
 }
 
 if ('' === $func) {

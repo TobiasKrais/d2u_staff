@@ -11,7 +11,7 @@
 
     $position_container_classes = 'col-12 col-lg-'. $cols . $offset_lg;
 
-    $author = new Staff('REX_VALUE[1]', rex_clang::getCurrentId());
+    $author = new TobiasKrais\D2UStaff\Staff('REX_VALUE[1]', rex_clang::getCurrentId());
     $type = 'rex_mediapool_preview';
 
     // Output
@@ -49,7 +49,7 @@
     }
     echo '</div>';
     if ('' != $author->citation) {
-        echo d2u_addon_frontend_helper::prepareEditorField($author->citation);
+        echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($author->citation);
     }
     echo '</div>';
     echo '</div>';
@@ -82,7 +82,7 @@
 		},
 		<?php
         if ($author->company_id) {
-            $company = new \D2U_Staff\Company($author->company_id);
+            $company = new \TobiasKrais\D2UStaff\Company($author->company_id);
             if ($company->company_id) {
         ?>"publisher": {
 			"@type": "Organization",

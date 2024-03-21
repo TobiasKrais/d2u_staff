@@ -5,7 +5,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 
 $position_container_classes = 'col-12 col-lg-'. $cols . $offset_lg;
 
-$author = new Staff('REX_VALUE[1]', rex_clang::getCurrentId());
+$author = new TobiasKrais\D2UStaff\Staff('REX_VALUE[1]', rex_clang::getCurrentId());
 $type = 'rex_mediapool_preview';
 
 // Output

@@ -1,8 +1,14 @@
 <?php
+
+namespace TobiasKrais\D2UStaff;
+
+use rex;
+use rex_sql;
+
 /**
  * Staff class.
  */
-class Staff implements \D2U_Helper\ITranslationHelper
+class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
 {
     /** @var int Staff database ID */
     public int $staff_id = 0;
