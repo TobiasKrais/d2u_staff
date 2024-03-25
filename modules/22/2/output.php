@@ -16,7 +16,7 @@
 
     // Output
     echo '<div class="'. $position_container_classes .'">';
-    echo '<div class="module-box">';
+    echo '<div class="module-box-mod-22-2">';
     echo '<div class="row align-items-center">';
     echo '<div class="col-3 col-md-2 author-image">';
     $link_start = '';

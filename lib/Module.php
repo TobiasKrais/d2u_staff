@@ -17,13 +17,13 @@ class Module
         $modules = [];
         $modules[] = new \TobiasKrais\D2UHelper\Module('22-1',
             'D2U Mitarbeiter - Liste',
-            4);
+            5);
         $modules[] = new \TobiasKrais\D2UHelper\Module('22-2',
             'D2U Mitarbeiter - Autorenbox Detailinfo',
-            2);
+            3);
         $modules[] = new \TobiasKrais\D2UHelper\Module('22-3',
             'D2U Mitarbeiter - Autorenbox Kurzinfo',
-            2);
+            3);
         return $modules;
     }
 }

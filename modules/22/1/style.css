@@ -1,16 +1,16 @@
-.module-box-wrapper {
+.module-box-wrapper-mod-22-1 {
 	margin-bottom: 15px;
 }
-.module-box {
+.module-box-mod-22-1 {
 	border: 1px solid article_color_h;
 	padding: 15px;
 }
-.module-box .author-head {
+.module-box-mod-22-1 .author-head {
 	padding-bottom: 15px;
 }
-.module-box .author-image {
+.module-box-mod-22-1 .author-image {
 	text-align: center;
 }
-.module-box img {
+.module-box-mod-22-1 img {
 	border-radius: 100px;
 }

@@ -13,8 +13,8 @@ $stafflist = TobiasKrais\D2UStaff\Staff::getAll(rex_clang::getCurrentId(), true)
 echo '<div class="'. $position_container_classes .'">';
 echo '<div class="row">';
 foreach ($stafflist as $staff) {
-    echo '<div class="col-12 col-md-6 module-box-wrapper">';
-    echo '<div class="module-box">';
+    echo '<div class="col-12 col-md-6 module-box-wrapper-mod-22-1">';
+    echo '<div class="module-box-mod-22-1">';
     echo '<div class="row">';
     echo '<div class="col-12 col-sm-6 col-md-4">';
     if ($staff->article_id > 0) {

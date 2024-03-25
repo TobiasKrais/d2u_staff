@@ -10,7 +10,7 @@ $type = 'rex_mediapool_preview';
 
 // Output
 echo '<div class="'. $position_container_classes .'">';
-echo '<div class="module-box-short">';
+echo '<div class="module-box-short-mod-22-3">';
 echo '<div class="row align-items-center">';
 echo '<div class="col-3 col-md-2 author-image">';
 $link_start = '';

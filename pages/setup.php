@@ -25,9 +25,11 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
-<p>1.2.1-DEV:</p>
+<p>1.2.1:</p>
 <ul>
-	<li>...</li>
+	<li>Modul 22-1 "D2U Mitarbeiter - Liste": CSS auf Modul beschränkt.</li>
+	<li>Modul 22-2 "D2U Mitarbeiter - Autorenbox Detailinfo": CSS auf Modul beschränkt.</li>
+	<li>Modul 22-3 "D2U Mitarbeiter - Autorenbox Kurzinfo": CSS auf Modul beschränkt.</li>
 </ul>
 <p>1.2.0:</p>
 <ul>
@@ -44,7 +46,7 @@ $d2u_module_manager->showManagerList();
 	</li>
 	<li>Modul 22-1 "D2U Mitarbeiter - Liste": auf großen Bildschirmen wird die Liste in 2 Spalten angezeigt.</li>
 	<li>Modul 22-2 "D2U Mitarbeiter - Autorenbox Detailinfo": LD+JSON Ausgabe Fehlerbehebung bei Verwendung eines '.</li>
-	<li>Modul 22-3 "D2U Mitarbeiter - Autorenbox Kurzinfo". Text auf 'Letztes Update am' ... 'von' geändert, damit deutlicher wird, dass das Datum ein Updatedatum ist.</li>
+	<li>Modul 22-3 "D2U Mitarbeiter - Autorenbox Kurzinfo": Text auf 'Letztes Update am' ... 'von' geändert, damit deutlicher wird, dass das Datum ein Updatedatum ist.</li>
 	<li>Bugfix: wenn ein Artikellink entfernt wurde, gab es beim Speichern einen Fehler.</li>
 </ul>
 <p>1.1.2:</p>
