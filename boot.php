@@ -8,9 +8,9 @@ if (rex::isBackend() && is_object(rex::getUser())) {
 }
 
 if (rex::isBackend()) {
-    rex_extension::register('CLANG_DELETED', 'rex_d2u_staff_clang_deleted');
-    rex_extension::register('D2U_HELPER_TRANSLATION_LIST', 'rex_d2u_staff_translation_list');
-    rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_staff_media_is_in_use');
+    rex_extension::register('CLANG_DELETED', rex_d2u_staff_clang_deleted(...));
+    rex_extension::register('D2U_HELPER_TRANSLATION_LIST', rex_d2u_staff_translation_list(...));
+    rex_extension::register('MEDIA_IS_IN_USE', rex_d2u_staff_media_is_in_use(...));
 }
 
 /**
