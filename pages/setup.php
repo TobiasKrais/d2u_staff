@@ -25,6 +25,10 @@ $d2u_module_manager->showManagerList();
 <p>Fehlermeldungen bitte über
 	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
 <h2>Changelog</h2>
+<p>1.2.2-DEV:</p>
+<ul>
+	<li>...</li>
+</ul>
 <p>1.2.1:</p>
 <ul>
 	<li>Modul 22-1 "D2U Mitarbeiter - Liste": CSS auf Modul beschränkt.</li>
