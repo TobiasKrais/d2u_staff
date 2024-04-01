@@ -87,7 +87,7 @@ function rex_d2u_staff_translation_list(rex_extension_point $ep) {
             if ('' === $staff_member->name) {
                 $staff_member = new TobiasKrais\D2UStaff\Staff($staff_member->staff_id, $source_clang_id);
             }
-            $html_staff .= '<li><a href="'. rex_url::backendPage('d2u_address/continent', ['entry_id' => $staff_member->staff_id, 'func' => 'edit']) .'">'. $staff_member->name .'</a></li>';
+            $html_staff .= '<li><a href="'. rex_url::backendPage('d2u_staff/staff', ['entry_id' => $staff_member->staff_id, 'func' => 'edit']) .'">'. $staff_member->name .'</a></li>';
         }
         $html_staff .= '</ul>';
         

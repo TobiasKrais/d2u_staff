@@ -27,7 +27,7 @@ $d2u_module_manager->showManagerList();
 <h2>Changelog</h2>
 <p>1.2.2-DEV:</p>
 <ul>
-	<li>...</li>
+	<li>Bugfix: Link in Übersetzungshilfe war fehlerhaft.</li>
 </ul>
 <p>1.2.1:</p>
 <ul>
