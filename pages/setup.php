@@ -28,6 +28,7 @@ $d2u_module_manager->showManagerList();
 <p>1.2.2-DEV:</p>
 <ul>
 	<li>Bugfix: Link in Übersetzungshilfe war fehlerhaft.</li>
+	<li>Modul 22-1 "D2U Mitarbeiter - Liste": Höhe Boxen angeglichen und Abstände korrigiert.</li>
 </ul>
 <p>1.2.1:</p>
 <ul>

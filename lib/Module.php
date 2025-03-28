@@ -17,7 +17,7 @@ class Module
         $modules = [];
         $modules[] = new \TobiasKrais\D2UHelper\Module('22-1',
             'D2U Mitarbeiter - Liste',
-            5);
+            6);
         $modules[] = new \TobiasKrais\D2UHelper\Module('22-2',
             'D2U Mitarbeiter - Autorenbox Detailinfo',
             3);
