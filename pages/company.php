@@ -1,4 +1,6 @@
 <?php
+
+use TobiasKrais\D2UHelper\BackendHelper;
 $func = rex_request('func', 'string');
 $entry_id = rex_request('entry_id', 'int');
 $message = rex_get('message', 'string');
@@ -80,9 +82,9 @@ if ('edit' === $func || 'clone' === $func || 'add' === $func) {
                                 $readonly = false;
                             }
 
-                            \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_name', 'form[name]', $company->name, true, $readonly);
-                            \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_url', 'form[url]', $company->url, false, $readonly);
-                            \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_staff_logo', '1', $company->logo, $readonly);
+                            BackendHelper::form_input('d2u_helper_name', 'form[name]', $company->name, true, $readonly);
+                            BackendHelper::form_input('d2u_staff_url', 'form[url]', $company->url, false, $readonly);
+                            BackendHelper::form_mediafield('d2u_staff_logo', '1', $company->logo, $readonly);
                         ?>
 					</div>
 				</fieldset>
@@ -113,15 +115,14 @@ if ('edit' === $func || 'clone' === $func || 'add' === $func) {
 		});
 	</script>
 	<?php
-        echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
-//		print \TobiasKrais\D2UHelper\BackendHelper::getJS();
+        echo BackendHelper::getCSS();
+    //		print BackendHelper::getJS();
 }
 
 if ('' === $func) {
     $query = 'SELECT company_id, name, url '
-        . 'FROM '. \rex::getTablePrefix() .'d2u_staff_company '
-        . 'ORDER BY name ASC';
-    $list = rex_list::factory($query, 1000);
+        . 'FROM '. \rex::getTablePrefix() .'d2u_staff_company ';
+    $list = rex_list::factory(query: $query, rowsPerPage: 1000, defaultSort: ['name' => 'ASC']);
 
     $list->addTableAttribute('class', 'table-striped table-hover');
 
@@ -135,11 +136,14 @@ if ('' === $func) {
 
     $list->setColumnLabel('company_id', rex_i18n::msg('id'));
     $list->setColumnLayout('company_id', ['<th class="rex-table-id">###VALUE###</th>', '<td class="rex-table-id">###VALUE###</td>']);
+    $list->setColumnSortable('company_id');
 
     $list->setColumnLabel('name', rex_i18n::msg('d2u_helper_name'));
     $list->setColumnParams('name', ['func' => 'edit', 'entry_id' => '###company_id###']);
+    $list->setColumnSortable('name');
 
     $list->setColumnLabel('url', rex_i18n::msg('d2u_staff_url'));
+    $list->setColumnSortable('url');
 
     if (rex::getUser() instanceof rex_user && (rex::getUser()->isAdmin() || rex::getUser()->hasPerm('d2u_immo[edit_data]'))) {
         $list->addColumn(rex_i18n::msg('module_functions'), '<i class="rex-icon rex-icon-edit"></i> ' . rex_i18n::msg('edit'));

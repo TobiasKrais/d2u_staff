@@ -1,4 +1,6 @@
 <?php
+
+use TobiasKrais\D2UHelper\BackendHelper;
 $func = rex_request('func', 'string');
 $entry_id = rex_request('entry_id', 'int');
 $message = rex_get('message', 'string');
@@ -87,6 +89,21 @@ elseif ('changestatus' === $func) {
     header('Location: '. rex_url::currentBackendPage());
     exit;
 }
+elseif ('priority_down' === $func || 'priority_up' === $func) {
+    $staff = new TobiasKrais\D2UStaff\Staff($entry_id, (int) rex_config::get('d2u_helper', 'default_lang'));
+    $staff->staff_id = $entry_id; // Ensure correct ID in case language has no object
+
+    if ('priority_down' === $func) {
+        ++$staff->priority;
+        $staff->save();
+    } elseif ($staff->priority > 1) {
+        --$staff->priority;
+        $staff->save();
+    }
+
+    header('Location: '. BackendHelper::getCurrentBackendPage(['message' => 'd2u_helper_priority_changed'], ['func', 'entry_id']));
+    exit;
+}
 
 // Form
 if ('edit' === $func || 'add' === $func) {
@@ -106,22 +123,22 @@ if ('edit' === $func || 'add' === $func) {
                                 $readonly = false;
                             }
 
-                            \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_name', 'form[name]', $staff->name, true, $readonly);
+                            BackendHelper::form_input('d2u_helper_name', 'form[name]', $staff->name, true, $readonly);
                             $options_gender = [
                                 'male' => rex_i18n::msg('d2u_staff_gender_male'),
                                 'female' => rex_i18n::msg('d2u_staff_gender_female'),
                                 'divers' => rex_i18n::msg('d2u_staff_gender_divers'),
                             ];
-                            \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_staff_gender', 'form[gender]', $options_gender, [$staff->gender], 1, false, $readonly);
-                            \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
-                            \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', 'online' === $staff->online_status, $readonly);
+                            BackendHelper::form_select('d2u_staff_gender', 'form[gender]', $options_gender, [$staff->gender], 1, false, $readonly);
+                            BackendHelper::form_mediafield('d2u_helper_picture', '1', $staff->picture, $readonly);
+                            BackendHelper::form_checkbox('d2u_helper_online_status', 'form[online_status]', 'online', 'online' === $staff->online_status, $readonly);
                             $options = [0 => rex_i18n::msg('d2u_staff_no_link')];
                             foreach (\TobiasKrais\D2UStaff\Company::getAll() as $company) {
                                 $options[$company->company_id] = $company->name;
                             }
-                            \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_staff_company', 'form[company_id]', $options, [$staff->company_id], 1, false, $readonly);
-                            \TobiasKrais\D2UHelper\BackendHelper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, (int) rex_config::get('d2u_helper', 'default_lang'), $readonly);
-                            \TobiasKrais\D2UHelper\BackendHelper::form_input('header_priority', 'form[priority]', $staff->priority, true, $readonly, 'number');
+                            BackendHelper::form_select('d2u_staff_company', 'form[company_id]', $options, [$staff->company_id], 1, false, $readonly);
+                            BackendHelper::form_linkfield('d2u_helper_article_id', 'article_id', $staff->article_id, (int) rex_config::get('d2u_helper', 'default_lang'), $readonly);
+                            BackendHelper::form_input('header_priority', 'form[priority]', $staff->priority, true, $readonly, 'number');
                         ?>
 					</div>
 				</fieldset>
@@ -144,7 +161,7 @@ if ('edit' === $func || 'add' === $func) {
                                     $options_translations['yes'] = rex_i18n::msg('d2u_helper_translation_needs_update');
                                     $options_translations['no'] = rex_i18n::msg('d2u_helper_translation_is_uptodate');
                                     $options_translations['delete'] = rex_i18n::msg('d2u_helper_translation_delete');
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_translation', 'form[lang]['. $rex_clang->getId() .'][translation_needs_update]', $options_translations, [$staff->translation_needs_update], 1, false, $readonly_lang);
+                                    BackendHelper::form_select('d2u_helper_translation', 'form[lang]['. $rex_clang->getId() .'][translation_needs_update]', $options_translations, [$staff->translation_needs_update], 1, false, $readonly_lang);
                                 } else {
                                     echo '<input type="hidden" name="form[lang]['. $rex_clang->getId() .'][translation_needs_update]" value="">';
                                 }
@@ -162,11 +179,11 @@ if ('edit' === $func || 'add' === $func) {
 							</script>
 							<div id="details_clang_<?= $rex_clang->getId() ?>">
 								<?php
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_lang_name', 'form[lang]['. $rex_clang->getId() .'][lang_name]', $staff->lang_name, false, $readonly_lang);
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_area_of_responsibility', 'form[lang]['. $rex_clang->getId() .'][area_of_responsibility]', $staff->area_of_responsibility, false, $readonly_lang);
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_position', 'form[lang]['. $rex_clang->getId() .'][position]', $staff->position, false, $readonly_lang);
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_textarea('d2u_staff_citation', 'form[lang]['. $rex_clang->getId() .'][citation]', $staff->citation, 5, false, $readonly_lang, true);
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_staff_knows_about', 'form[lang]['. $rex_clang->getId() .'][knows_about]', $staff->knows_about, false, $readonly_lang);
+                                    BackendHelper::form_input('d2u_staff_lang_name', 'form[lang]['. $rex_clang->getId() .'][lang_name]', $staff->lang_name, false, $readonly_lang);
+                                    BackendHelper::form_input('d2u_staff_area_of_responsibility', 'form[lang]['. $rex_clang->getId() .'][area_of_responsibility]', $staff->area_of_responsibility, false, $readonly_lang);
+                                    BackendHelper::form_input('d2u_staff_position', 'form[lang]['. $rex_clang->getId() .'][position]', $staff->position, false, $readonly_lang);
+                                    BackendHelper::form_textarea('d2u_staff_citation', 'form[lang]['. $rex_clang->getId() .'][citation]', $staff->citation, 5, false, $readonly_lang, true);
+                                    BackendHelper::form_input('d2u_staff_knows_about', 'form[lang]['. $rex_clang->getId() .'][knows_about]', $staff->knows_about, false, $readonly_lang);
                                 ?>
 							</div>
 						</div>
@@ -193,17 +210,17 @@ if ('edit' === $func || 'add' === $func) {
 	</form>
 	<br>
 	<?php
-        echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
-        echo \TobiasKrais\D2UHelper\BackendHelper::getJS();
+        echo BackendHelper::getCSS();
+        echo BackendHelper::getJS();
 }
 
 if ('' === $func) {
-    $query = 'SELECT staff.staff_id, name, position, citation, priority, online_status '
+    $query = 'SELECT staff.staff_id, name, position, citation, priority, online_status, '
+        . '(SELECT MAX(priority) FROM '. rex::getTablePrefix() .'d2u_staff) AS max_priority '
         . 'FROM '. rex::getTablePrefix() .'d2u_staff AS staff '
         . 'LEFT JOIN '. rex::getTablePrefix() .'d2u_staff_lang AS lang '
-            . 'ON staff.staff_id = lang.staff_id AND lang.clang_id = '. rex_config::get('d2u_helper', 'default_lang', rex_clang::getStartId()) .' '
-        .'ORDER BY name ASC';
-    $list = rex_list::factory($query, 1000);
+            . 'ON staff.staff_id = lang.staff_id AND lang.clang_id = '. rex_config::get('d2u_helper', 'default_lang', rex_clang::getStartId()) .' ';
+    $list = rex_list::factory(query: $query, rowsPerPage: 1000, defaultSort: ['name' => 'ASC']);
 
     $list->addTableAttribute('class', 'table-striped table-hover');
 
@@ -217,11 +234,14 @@ if ('' === $func) {
 
     $list->setColumnLabel('staff_id', rex_i18n::msg('id'));
     $list->setColumnLayout('staff_id', ['<th class="rex-table-id">###VALUE###</th>', '<td class="rex-table-id">###VALUE###</td>']);
+    $list->setColumnSortable('staff_id');
 
     $list->setColumnLabel('name', rex_i18n::msg('d2u_helper_name'));
     $list->setColumnParams('name', ['func' => 'edit', 'entry_id' => '###staff_id###']);
+    $list->setColumnSortable('name');
 
     $list->setColumnLabel('position', rex_i18n::msg('d2u_staff_position'));
+    $list->setColumnSortable('position');
 
     $list->setColumnLabel('citation', rex_i18n::msg('d2u_staff_citation'));
     $list->setColumnFormat('citation', 'custom', static function ($params) {
@@ -234,6 +254,18 @@ if ('' === $func) {
     });
 
     $list->setColumnLabel('priority', rex_i18n::msg('header_priority'));
+    $list->setColumnSortable('priority');
+    $list->setColumnFormat('priority', 'custom', static function ($params) {
+        $listParams = $params['list'];
+
+        return BackendHelper::getPriorityButtons(
+            (int) $listParams->getValue('staff_id'),
+            (int) $listParams->getValue('priority'),
+            (int) $listParams->getValue('max_priority')
+        );
+    });
+
+    $list->removeColumn('max_priority');
 
     $list->addColumn(rex_i18n::msg('module_functions'), '<i class="rex-icon rex-icon-edit"></i> ' . rex_i18n::msg('edit'));
     $list->setColumnLayout(rex_i18n::msg('module_functions'), ['<th class="rex-table-action" colspan="2">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
