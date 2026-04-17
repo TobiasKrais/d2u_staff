@@ -1,0 +1,23 @@
+d2u_staff = D2U Medewerkers
+d2u_staff_area_of_responsibility = Verantwoordelijkheidsgebied
+d2u_staff_citation = Info
+d2u_staff_company = Bedrijf
+d2u_staff_gender = Geslacht
+d2u_staff_gender_divers = Divers
+d2u_staff_gender_female = Vrouwelijk
+d2u_staff_gender_male = Mannelijk
+d2u_staff_knows_about = Kennis
+d2u_staff_lang_name = Taalspecifieke naam (optioneel)
+d2u_staff_logo = Logo
+d2u_staff_no_link = Geen koppeling
+d2u_staff_no_company_found = Er zijn nog geen bedrijven aangemaakt.
+d2u_staff_no_staff_found = Er zijn nog geen medewerkers aangemaakt.
+d2u_staff_picture = Afbeelding
+d2u_staff_position = Functie
+d2u_staff_staff = Medewerkers
+d2u_staff_url = URL
+
+d2u_staff_rights = D2U Medewerkers add-on
+d2u_staff_rights_edit_data = D2U Medewerkers add-on: bewerkingsrechten voor gegevens en taaloverstijgende inhoud
+d2u_staff_rights_edit_lang = D2U Medewerkers add-on: bewerkingsrechten voor vertalingen en taalspecifieke inhoud (de talen uit de rolinstellingen zijn van toepassing)
+d2u_staff_rights_settings = D2U Medewerkers add-on: instellingen
