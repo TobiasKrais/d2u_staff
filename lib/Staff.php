@@ -312,8 +312,8 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
     private function setPriority($delete = false): void
     {
         // Pull prios from database
-        $query = 'SELECT staff_id, priority FROM '. rex::getTablePrefix() .'d2u_staff '
-            .'WHERE staff_id <> '. $this->staff_id .' ORDER BY priority';
+        $query = 'SELECT staff_id FROM '. rex::getTablePrefix() .'d2u_staff '
+            .'WHERE staff_id <> '. $this->staff_id .' ORDER BY priority, staff_id';
         $result = rex_sql::factory();
         $result->setQuery($query);
 
@@ -329,7 +329,7 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
 
         $staffs = [];
         for ($i = 0; $i < $result->getRows(); ++$i) {
-            $staffs[$result->getValue('priority')] = $result->getValue('staff_id');
+            $staffs[] = (int) $result->getValue('staff_id');
             $result->next();
         }
         array_splice($staffs, $this->priority - 1, 0, [$this->staff_id]);
