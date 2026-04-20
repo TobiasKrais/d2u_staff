@@ -2,6 +2,10 @@
 
 ?>
 <h2>Changelog</h2>
+<p>1.3.1-DEV:</p>
+<ul>
+	<li>...</li>
+</ul>
 <p>1.3.0:</p>
 <ul>
 	<li>Neue Module 22-4 bis 22-6 als Bootstrap-5-Varianten der bestehenden Beispielmodule hinzugefügt.</li>
