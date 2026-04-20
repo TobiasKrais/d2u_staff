@@ -1,6 +1,7 @@
 <?php
 
 use TobiasKrais\D2UHelper\BackendHelper;
+
 // save settings
 if ('save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings = rex_post('settings', 'array', []);

@@ -1,41 +1,11 @@
 <?php
-$showChangelogOnly = defined('D2U_STAFF_SHOW_CHANGELOG');
-
-if (!$showChangelogOnly) {
-/*
- * Modules
- */
-$d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(TobiasKrais\D2UStaff\Module::getModules(), 'modules/', 'd2u_staff');
-
-// \TobiasKrais\D2UHelper\ModuleManager actions
-$d2u_module_id = rex_request('d2u_module_id', 'string');
-$paired_module = rex_request('pair_'. $d2u_module_id, 'int');
-$function = rex_request('function', 'string');
-if ('' !== $d2u_module_id) {
-    $d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
-}
-
-// \TobiasKrais\D2UHelper\ModuleManager show list
-$d2u_module_manager->showManagerList();
 
 ?>
-<h2>Beispielseiten</h2>
-<ul>
-	<li>D2U Mitarbeiter Addon: <a href="https://www.kaltenbach.com/de/unternehmen/kaltenbach-gruppe/" target="_blank">
-		www.kaltenbach.com</a>.</li>
-</ul>
-<h2>Support</h2>
-<p>Fehlermeldungen bitte über
-	<a href="https://github.com/TobiasKrais/d2u_staff/issues" target="_blank">GitHub</a> melden.</p>
-<?php } ?>
-
-<?php if ($showChangelogOnly) { ?>
 <h2>Changelog</h2>
-<p>1.3.0-DEV:</p>
+<p>1.3.0:</p>
 <ul>
 	<li>Neue Module 22-4 bis 22-6 als Bootstrap-5-Varianten der bestehenden Beispielmodule hinzugefügt.</li>
 	<li>Module 22-1 bis 22-3 als "(BS4, deprecated)" markiert. Die BS4-Varianten werden im nächsten Major Release entfernt.</li>
-	<li>Benötigt d2u_helper &gt;= 2.1.0.</li>
 	<li>Bugfix: Prioritäten werden bei Mitarbeitenden nach dem Speichern wieder stabil neu durchnummeriert, auch wenn in der Datenbank bereits doppelte Werte vorhanden sind.</li>
 	<li>Backend-Listen sortierbar gemacht und Standardsortierungen von SQL-Queries auf <code>rex_list</code>-<code>defaultSort</code> umgestellt.</li>
 	<li>Die Priorität von Mitarbeitenden kann in der Backend-Liste jetzt direkt per Hoch-/Runter-Buttons geändert werden.</li>
@@ -122,4 +92,3 @@ $d2u_module_manager->showManagerList();
 <ul>
 	<li>Initiale Version.</li>
 </ul>
-<?php } ?>
