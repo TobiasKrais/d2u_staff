@@ -4,6 +4,7 @@
 <h2>Changelog</h2>
 <p>1.3.1-DEV:</p>
 <ul>
+	<li>Backend: CSRF-Schutz fuer Speichern-, Loesch-, Status- und Prioritaetsaktionen der Mitarbeitendenverwaltung ergaenzt.</li>
 	<li>...</li>
 </ul>
 <p>1.3.0:</p>
