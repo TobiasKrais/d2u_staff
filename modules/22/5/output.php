@@ -22,10 +22,10 @@
     $link_start = '';
     $link_end = '';
     if ($author->article_id > 0) {
-        $link_start = '<a href="'. rex_getUrl($author->article_id) .'">';
+        $link_start = '<a href="'. rex_escape(rex_getUrl((int) $author->article_id)) .'">';
         echo $link_start;
     }
-    echo '<img src="'. ('' == $author->picture ? rex_addon::get('d2u_staff')->getAssetsUrl('noavatar.jpg') : 'index.php?rex_media_type='. $type .'&rex_media_file='. $author->picture) .'" alt="'. $author->name .'">';
+    echo '<img src="'. ('' == $author->picture ? rex_addon::get('d2u_staff')->getAssetsUrl('noavatar.jpg') : 'index.php?rex_media_type='. rex_escape($type) .'&rex_media_file='. rex_escape((string) $author->picture)) .'" alt="'. rex_escape($author->name) .'">';
     if ($author->article_id > 0) {
         $link_end = '</a>';
         echo $link_end;
@@ -33,17 +33,17 @@
     echo '</div>';
     echo '<div class="col-9 col-md-10">';
     echo '<div class="author-head">';
-    echo '<strong>'. $link_start . $author->name . $link_end .'</strong>';
+    echo '<strong>'. $link_start . rex_escape($author->name) . $link_end .'</strong>';
     if ('' != $author->area_of_responsibility || '' != $author->position) {
         echo '<small> - ';
         if ('' != $author->area_of_responsibility) {
-            echo $author->area_of_responsibility;
+            echo rex_escape($author->area_of_responsibility);
         }
         if ('' != $author->area_of_responsibility && '' != $author->position) {
             echo ' / ';
         }
         if ('' != $author->position) {
-            echo $author->position;
+            echo rex_escape($author->position);
         }
         echo '</small>';
     }
@@ -71,12 +71,12 @@
 			"@type": "Person",
 			"name": <?= json_encode(html_entity_decode(strip_tags('' != $author->lang_name ? $author->lang_name : $author->name)), JSON_UNESCAPED_UNICODE) ?>,
 			"description": <?= json_encode(html_entity_decode(strip_tags($author->citation)), JSON_UNESCAPED_UNICODE) ?>,
-		    "gender": "<?= $author->gender ?>",
+		    "gender": <?= json_encode((string) $author->gender, JSON_UNESCAPED_UNICODE) ?>,
 			"knowsAbout": <?= json_encode(html_entity_decode(strip_tags($author->knows_about)), JSON_UNESCAPED_UNICODE) ?>,
-			"url": "<?= $author->article_id > 0 ? rex_getUrl($author->article_id) : $current_domain_with_scheme ?>",
+			"url": <?= json_encode($author->article_id > 0 ? rex_getUrl((int) $author->article_id) : $current_domain_with_scheme, JSON_UNESCAPED_UNICODE) ?>,
 			"image": {
 				"@type":"ImageObject",
-				"url":"<?= $current_domain_with_scheme . rex_url::media($author->picture) ?>",
+				"url": <?= json_encode($current_domain_with_scheme . rex_url::media((string) $author->picture), JSON_UNESCAPED_UNICODE) ?>,
 				"caption": <?= json_encode(html_entity_decode(strip_tags('' != $author->lang_name ? $author->lang_name : $author->name)), JSON_UNESCAPED_UNICODE) ?>
 			}
 		},
@@ -87,10 +87,10 @@
         ?>"publisher": {
 			"@type": "Organization",
 			"name": <?= json_encode(html_entity_decode($company->name), JSON_UNESCAPED_UNICODE) ?>,
-			"url": "<?= $company->url ?>",
+			"url": <?= json_encode((string) $company->url, JSON_UNESCAPED_UNICODE) ?>,
 			"logo": {
 				"@type": "ImageObject",
-				"url": "<?= $current_domain_with_scheme . rex_url::media($company->logo) ?>"
+				"url": <?= json_encode($current_domain_with_scheme . rex_url::media((string) $company->logo), JSON_UNESCAPED_UNICODE) ?>
 			}
 		},
 		<?php

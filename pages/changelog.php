@@ -5,8 +5,9 @@
 <p>1.3.1-DEV:</p>
 <ul>
 	<li>Backend: CSRF-Schutz fuer Speichern-, Loesch-, Status- und Prioritaetsaktionen der Mitarbeitendenverwaltung ergaenzt.</li>
-	<li>Backend: CSRF-Schutz fuer Modul-Installation, -Update und -Deinstallation auf der Setup-Seite ergaenzt.</li>
-</ul>
+	<li>Backend: CSRF-Schutz fuer Modul-Installation, -Update und -Deinstallation auf der Setup-Seite ergaenzt.</li>        <li>Security: Die <code>media-is-in-use</code>-Extension-Points in <code>boot.php</code> verwenden jetzt gebundene Parameter statt SQL-String-Konkatenation mit <code>addslashes()</code>.</li>
+        <li>Security: Die <code>save()</code>-Methode in <code>lib/Staff.php</code> verwendet jetzt gebundene Parameter statt SQL-String-Konkatenation mit <code>addslashes()</code>.</li>
+        <li>Security: Modul-Ausgaben (<code>modules/22/1-6/output.php</code>) härten Backend-Eingaben gegen XSS via <code>rex_escape()</code> für Mitarbeiternamen, Position, Verantwortungsbereich und Bilder; JSON-LD-Werte (Geschlecht/URL/Bild/Firma) werden mit <code>json_encode()</code> sicher in <code>application/ld+json</code> eingefügt; Artikel-IDs als <code>(int)</code> gecastet.</li></ul>
 <p>1.3.0:</p>
 <ul>
 	<li>Neue Module 22-4 bis 22-6 als Bootstrap-5-Varianten der bestehenden Beispielmodule hinzugefügt.</li>

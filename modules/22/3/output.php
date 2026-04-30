@@ -16,10 +16,10 @@ echo '<div class="col-3 col-md-2 author-image">';
 $link_start = '';
 $link_end = '';
 if ($author->article_id > 0) {
-    $link_start = '<a href="'. rex_getUrl($author->article_id) .'">';
+    $link_start = '<a href="'. rex_escape(rex_getUrl((int) $author->article_id)) .'">';
     echo $link_start;
 }
-echo '<img src="'. ('' == $author->picture ? rex_addon::get('d2u_staff')->getAssetsUrl('noavatar.jpg') : 'index.php?rex_media_type='. $type .'&rex_media_file='. $author->picture) .'" alt="'. $author->name .'">';
+echo '<img src="'. ('' == $author->picture ? rex_addon::get('d2u_staff')->getAssetsUrl('noavatar.jpg') : 'index.php?rex_media_type='. rex_escape($type) .'&rex_media_file='. rex_escape((string) $author->picture)) .'" alt="'. rex_escape($author->name) .'">';
 if ($author->article_id > 0) {
     $link_end = '</a>';
     echo $link_end;
@@ -28,7 +28,7 @@ echo '</div>';
 echo '<div class="col-9 col-md-10">';
 echo '<div class="author-head">';
 echo \Sprog\Wildcard::get('d2u_staff_published') .' <strong>'. date('d.m.Y', rex_article::getCurrent()->getUpdateDate()) .'</strong>, '
-    . \Sprog\Wildcard::get('d2u_staff_by') .' <strong>'. $link_start . $author->name . $link_end .'</strong>';
+    . \Sprog\Wildcard::get('d2u_staff_by') .' <strong>'. $link_start . rex_escape($author->name) . $link_end .'</strong>';
 echo '</div>';
 echo '</div>';
 echo '</div>';

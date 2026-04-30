@@ -263,19 +263,19 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
                     .'article_id = '. ($this->article_id ?: 0) .', '
                     ."online_status = '". $this->online_status ."', "
                     ."picture = '". $this->picture ."', "
-                    ."priority = ". $this->priority .", "
-                    ."name = '". addslashes($this->name) ."', "
-                    ."gender = '". addslashes($this->gender) ."', "
-                    .'company_id = '. $this->company_id;
+                    .'priority = '. (int) $this->priority .', '
+                    .'name = :name, '
+                    .'gender = :gender, '
+                    .'company_id = '. (int) $this->company_id;
 
             if (0 === $this->staff_id) {
                 $query = 'INSERT INTO '. $query;
             } else {
-                $query = 'UPDATE '. $query .' WHERE staff_id = '. $this->staff_id;
+                $query = 'UPDATE '. $query .' WHERE staff_id = '. (int) $this->staff_id;
             }
 
             $result = rex_sql::factory();
-            $result->setQuery($query);
+            $result->setQuery($query, [':name' => $this->name, ':gender' => $this->gender]);
             if (0 === $this->staff_id) {
                 $this->staff_id = (int) $result->getLastId();
                 $error = $result->hasError();
@@ -287,17 +287,21 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
             $pre_save_staff = new self($this->staff_id, $this->clang_id);
             if ($pre_save_staff != $this) {
                 $query = 'REPLACE INTO '. rex::getTablePrefix() .'d2u_staff_lang SET '
-                        .'staff_id = '. $this->staff_id .', '
-                        .'clang_id = '. $this->clang_id .', '
-                        ."lang_name = '". addslashes($this->lang_name) ."', "
-                        ."knows_about = '". addslashes($this->knows_about) ."', "
+                        .'staff_id = '. (int) $this->staff_id .', '
+                        .'clang_id = '. (int) $this->clang_id .', '
+                        .'lang_name = :lang_name, '
+                        .'knows_about = :knows_about, '
                         ."area_of_responsibility = '". $this->area_of_responsibility ."', "
-                        ."citation = '". addslashes(htmlspecialchars($this->citation)) ."', "
+                        .'citation = :citation, '
                         ."position = '". $this->position ."', "
                         ."translation_needs_update = '". $this->translation_needs_update ."' ";
 
                 $result = rex_sql::factory();
-                $result->setQuery($query);
+                $result->setQuery($query, [
+                    ':lang_name' => $this->lang_name,
+                    ':knows_about' => $this->knows_about,
+                    ':citation' => htmlspecialchars($this->citation),
+                ]);
                 $error = $result->hasError();
             }
         }
