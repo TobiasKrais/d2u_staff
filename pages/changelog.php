@@ -4,6 +4,7 @@
 <h2>Changelog</h2>
 <p>1.3.1-DEV:</p>
 <ul>
+	<li>Backend: Abbrechen-Buttons in Mitarbeiter- und Firmenformularen fuehren jetzt wieder zur Liste.</li>
 	<li>Backend: CSRF-Schutz fuer Speichern-, Loesch-, Status- und Prioritaetsaktionen der Mitarbeitendenverwaltung ergaenzt.</li>
 	<li>Backend: CSRF-Schutz fuer Modul-Installation, -Update und -Deinstallation auf der Setup-Seite ergaenzt.</li>        <li>Security: Die <code>media-is-in-use</code>-Extension-Points in <code>boot.php</code> verwenden jetzt gebundene Parameter statt SQL-String-Konkatenation mit <code>addslashes()</code>.</li>
         <li>Security: Die <code>save()</code>-Methode in <code>lib/Staff.php</code> verwendet jetzt gebundene Parameter statt SQL-String-Konkatenation mit <code>addslashes()</code>.</li>
