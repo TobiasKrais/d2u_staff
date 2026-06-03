@@ -94,25 +94,25 @@ class Company
 
     /**
      * Updates or inserts the object into database.
-     * @return in error code if error occurs
+     * @return bool true if an error occurs
      */
     public function save()
     {
         $error = false;
 
         $query = rex::getTablePrefix() .'d2u_staff_company SET '
-                ."name = '". $this->name ."', "
-                ."url = '". $this->url ."', "
-                ."logo = '". $this->logo ."' ";
+                .'name = :name, '
+                .'url = :url, '
+                .'logo = :logo ';
 
         if (0 === $this->company_id) {
             $query = 'INSERT INTO '. $query;
         } else {
-            $query = 'UPDATE '. $query .' WHERE company_id = '. $this->company_id;
+            $query = 'UPDATE '. $query .' WHERE company_id = '. (int) $this->company_id;
         }
 
         $result = rex_sql::factory();
-        $result->setQuery($query);
+        $result->setQuery($query, [':name' => $this->name, ':url' => $this->url, ':logo' => $this->logo]);
         if (0 === $this->company_id) {
             $this->company_id = (int) $result->getLastId();
             $error = $result->hasError();

@@ -53,7 +53,7 @@ function rex_d2u_staff_media_is_in_use(rex_extension_point $ep)
     // Staff
     for ($i = 0; $i < $sql_staff->getRows(); ++$i) {
         $message = '<a href="javascript:openPage(\'index.php?page=d2u_staff/staff&func=edit&entry_id='.
-            $sql_staff->getValue('staff_id') .'\')">'. rex_i18n::msg('d2u_staff_rights') .' - '. rex_i18n::msg('d2u_staff_staff') .': '. $sql_staff->getValue('name') .'</a>';
+            $sql_staff->getValue('staff_id') .'\')">'. rex_i18n::msg('d2u_staff_rights') .' - '. rex_i18n::msg('d2u_staff_staff') .': '. rex_escape($sql_staff->getValue('name')) .'</a>';
         if (!in_array($message, $warning, true)) {
             $warning[] = $message;
         }
@@ -87,7 +87,7 @@ function rex_d2u_staff_translation_list(rex_extension_point $ep) {
             if ('' === $staff_member->name) {
                 $staff_member = new TobiasKrais\D2UStaff\Staff($staff_member->staff_id, $source_clang_id);
             }
-            $html_staff .= '<li><a href="'. rex_url::backendPage('d2u_staff/staff', ['entry_id' => $staff_member->staff_id, 'func' => 'edit']) .'">'. $staff_member->name .'</a></li>';
+            $html_staff .= '<li><a href="'. rex_url::backendPage('d2u_staff/staff', ['entry_id' => $staff_member->staff_id, 'func' => 'edit']) .'">'. rex_escape($staff_member->name) .'</a></li>';
         }
         $html_staff .= '</ul>';
         
