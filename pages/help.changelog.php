@@ -1,4 +1,8 @@
 <h1>Changelog</h1>
+<p>1.3.2-DEV:</p>
+<ul>
+	<li>...</li>
+</ul>
 <p>1.3.1:</p>
 <ul>
 	<li>Backend: Abbrechen-Buttons in Mitarbeiter- und Firmenformularen fuehren jetzt wieder zur Liste.</li>
