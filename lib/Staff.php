@@ -260,9 +260,9 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
 
         if (0 === $this->staff_id || $pre_save_staff != $this) {
             $query = rex::getTablePrefix() .'d2u_staff SET '
-                    .'article_id = '. ($this->article_id ?: 0) .', '
-                    ."online_status = '". $this->online_status ."', "
-                    ."picture = '". $this->picture ."', "
+                    .'article_id = '. ((int) $this->article_id ?: 0) .', '
+                    .'online_status = :online_status, '
+                    .'picture = :picture, '
                     .'priority = '. (int) $this->priority .', '
                     .'name = :name, '
                     .'gender = :gender, '
@@ -275,7 +275,12 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
             }
 
             $result = rex_sql::factory();
-            $result->setQuery($query, [':name' => $this->name, ':gender' => $this->gender]);
+            $result->setQuery($query, [
+                ':online_status' => $this->online_status,
+                ':picture' => $this->picture,
+                ':name' => $this->name,
+                ':gender' => $this->gender,
+            ]);
             if (0 === $this->staff_id) {
                 $this->staff_id = (int) $result->getLastId();
                 $error = $result->hasError();
@@ -291,16 +296,19 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
                         .'clang_id = '. (int) $this->clang_id .', '
                         .'lang_name = :lang_name, '
                         .'knows_about = :knows_about, '
-                        ."area_of_responsibility = '". $this->area_of_responsibility ."', "
+                        .'area_of_responsibility = :area_of_responsibility, '
                         .'citation = :citation, '
-                        ."position = '". $this->position ."', "
-                        ."translation_needs_update = '". $this->translation_needs_update ."' ";
+                        .'position = :position, '
+                        .'translation_needs_update = :translation_needs_update ';
 
                 $result = rex_sql::factory();
                 $result->setQuery($query, [
                     ':lang_name' => $this->lang_name,
                     ':knows_about' => $this->knows_about,
+                    ':area_of_responsibility' => $this->area_of_responsibility,
                     ':citation' => htmlspecialchars($this->citation),
+                    ':position' => $this->position,
+                    ':translation_needs_update' => $this->translation_needs_update,
                 ]);
                 $error = $result->hasError();
             }

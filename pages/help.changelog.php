@@ -1,7 +1,7 @@
 <h1>Changelog</h1>
 <p>1.3.2-DEV:</p>
 <ul>
-	<li>...</li>
+	<li>Security/Bugfix: Die <code>save()</code>-Methode in <code>lib/Staff.php</code> verwendet jetzt gebundene Parameter statt SQL-String-Konkatenation (u. a. <code>online_status</code>, <code>picture</code>, <code>area_of_responsibility</code>, <code>position</code>, <code>translation_needs_update</code>); IDs werden nach <code>int</code> gecastet. Verhindert SQL-Injection und <code>rex_sql_exception</code> bei Werten mit Anfuehrungszeichen.</li>
 </ul>
 <p>1.3.1:</p>
 <ul>
