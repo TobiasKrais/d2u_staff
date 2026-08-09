@@ -1,6 +1,7 @@
 <h1>Changelog</h1>
 <p>1.3.2:</p>
 <ul>
+	<li>Wartung: Interne CI-Dateien im Verzeichnis <code>.github</code> (GitHub Actions, Dependabot) werden nicht mehr mit dem Installer-Paket ausgeliefert.</li>
 	<li>Bugfix: Der Online/Offline-Schalter in der Backend-Liste funktioniert wieder. Beim Erzeugen des CSRF-geschützten Status-Links wurde der Platzhalter für die Datensatz-ID URL-kodiert und dadurch nicht mehr durch die echte ID ersetzt.</li>
 	<li>Security/Bugfix: Die <code>save()</code>-Methode in <code>lib/Staff.php</code> verwendet jetzt gebundene Parameter statt SQL-String-Konkatenation (u. a. <code>online_status</code>, <code>picture</code>, <code>area_of_responsibility</code>, <code>position</code>, <code>translation_needs_update</code>); IDs werden nach <code>int</code> gecastet. Verhindert SQL-Injection und <code>rex_sql_exception</code> bei Werten mit Anfuehrungszeichen.</li>
 </ul>
