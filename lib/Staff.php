@@ -8,7 +8,7 @@ use rex_sql;
 /**
  * Staff class.
  */
-class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
+class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper, \TobiasKrais\D2UHelper\ITranslateable
 {
     /** @var int Staff database ID */
     public int $staff_id = 0;
@@ -240,6 +240,55 @@ class Staff implements \TobiasKrais\D2UHelper\ITranslationHelper
         }
 
         return $objects;
+    }
+
+    /**
+     * Translate this staff member from a source language into its own (target)
+     * language using ai_platform and store the result. Personal name and gender
+     * are not translated.
+     * @param int $sourceClangId Redaxo clang id of the source language
+     * @return bool true on success
+     */
+    public function translateFrom(int $sourceClangId): bool
+    {
+        if ($this->staff_id <= 0 || $sourceClangId === $this->clang_id) {
+            return false;
+        }
+
+        $source = new self($this->staff_id, $sourceClangId);
+        if ($source->staff_id <= 0) {
+            return false;
+        }
+        if ('' === $source->position && '' === $source->area_of_responsibility
+            && '' === $source->knows_about && '' === $source->citation) {
+            return false;
+        }
+
+        try {
+            $translated = \TobiasKrais\D2UHelper\AiTranslationHelper::translateFields([
+                'position' => ['value' => $source->position, 'html' => false],
+                'area_of_responsibility' => ['value' => $source->area_of_responsibility, 'html' => false],
+                'knows_about' => ['value' => $source->knows_about, 'html' => false],
+                'citation' => ['value' => $source->citation, 'html' => true],
+            ], $sourceClangId, $this->clang_id);
+        } catch (\Throwable $e) {
+            return false;
+        }
+
+        $this->position = $translated['position'];
+        $this->area_of_responsibility = $translated['area_of_responsibility'];
+        $this->knows_about = $translated['knows_about'];
+        $this->citation = $translated['citation'];
+        // Keep the (personal) name and gender from the source; they are not translated.
+        $this->name = $source->name;
+        $this->gender = $source->gender;
+        if ('' === $this->lang_name) {
+            $this->lang_name = $source->lang_name;
+        }
+        $this->translation_needs_update = 'no';
+
+        // save() returns the error flag (true on error), so success is its negation.
+        return false === $this->save();
     }
 
     /**
