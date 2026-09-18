@@ -1,6 +1,7 @@
 <h1>Changelog</h1>
 <p>1.3.3-DEV:</p>
 <ul>
+        <li>Neu: Niederländische Frontend-Übersetzung (SProg-Wildcards <code>d2u_staff_by</code> → „door“ und <code>d2u_staff_published</code> → „Laatst bijgewerkt op“). Niederländisch ist jetzt auch in den Einstellungen als voreingestellte Sprachersetzung wählbar.</li>
 	<li>Neu: KI-Übersetzung in der Übersetzungshilfe von d2u_helper. Ist das Addon <code>ai_platform</code> installiert und ein Standard-Textprofil konfiguriert, lassen sich fehlende oder zu aktualisierende Übersetzungen von Mitarbeitern (Position, Zuständigkeitsbereich, Kenntnisse, Zitat) direkt in der Übersetzungshilfe automatisch übersetzen (einzeln oder alle auf einmal). Personenname und Geschlecht werden nicht übersetzt. Dazu implementiert <code>Staff</code> das neue Interface <code>TobiasKrais\D2UHelper\ITranslateable</code> und die <code>boot.php</code> beantwortet den Extension Point <code>D2U_HELPER_TRANSLATE_OBJECT</code>.</li>
 </ul>
 <p>1.3.2:</p>

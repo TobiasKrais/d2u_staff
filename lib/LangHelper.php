@@ -47,6 +47,15 @@ class LangHelper extends \TobiasKrais\D2UHelper\ALangHelper
     ];
 
     /**
+     * @var array<string,string> Array with dutch replacements. Key is the wildcard,
+     * value the replacement.
+     */
+    protected array $replacements_dutch = [
+        'd2u_staff_by' => 'door',
+        'd2u_staff_published' => 'Laatst bijgewerkt op',
+    ];
+
+    /**
      * Factory method.
      * @return self Object
      */
@@ -67,6 +76,8 @@ class LangHelper extends \TobiasKrais\D2UHelper\ALangHelper
                 // Load values for input
                 if ('french' === $lang_replacement && isset($this->replacements_french) && isset($this->replacements_french[$key])) {
                     $value = $this->replacements_french[$key];
+                } elseif ('dutch' === $lang_replacement && isset($this->replacements_dutch) && isset($this->replacements_dutch[$key])) {
+                    $value = $this->replacements_dutch[$key];
                 } elseif ('german' === $lang_replacement && isset($this->replacements_german) && isset($this->replacements_german[$key])) {
                     $value = $this->replacements_german[$key];
                 } elseif ('spanish' === $lang_replacement && isset($this->replacements_spanish) && isset($this->replacements_spanish[$key])) {
